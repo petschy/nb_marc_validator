@@ -13,12 +13,13 @@ use MARC::Field;
 use lib 'lib';
 use StandardBibId;
 use BsgBibId;
+use SbBibId;
 
 # Marc file
 my $marcfile = shift;
 $marcfile = "mrc/$marcfile";
 my $rule = shift;
-my @rules = ( "Standard", "Bsg", "SB" );
+my @rules = ( "Standard", "Bsg", "Sb" );
 unless ( grep /^$rule$/, @rules )
 {
 	say "Usage: 'perl validate.pl [filename].mrc Standard|Sb|Bsg'";
