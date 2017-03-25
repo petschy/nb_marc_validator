@@ -27,7 +27,7 @@ sub set_bib_id
 	} else
 	{
 		$self->bib_id($bib_id);
-		my @warning = ( $self->bib_id, '001', '-', qq(Ungültige BibId) );
+		my @warning = ( $self->bib_id, '001', '-',$self->bib_id, qq(Ungültige BibId) );
 		return @warning;
 	}
 
