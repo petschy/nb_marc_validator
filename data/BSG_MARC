@@ -113,7 +113,7 @@ d       R       Modifying agency
 e       R       Description conventions 
 
 041     R       LANGUAGE CODE
-ind1    01      Translation indication
+ind1    b01      Translation indication
 ind2    blank   Source of code
 a       R       Language code of text/sound track or separate title 
 b       R       Language code of summary or abstract
@@ -337,7 +337,7 @@ g       R       Date of manufacture
 3       NR      Materials specified 
 
 264     R       PRODUCTION, PUBLICATION, DISTRIBUTION, MANUFACTURE, AND COPYRIGHT NOTICE
-ind1    23      Sequence of statements
+ind1    b23      Sequence of statements
 ind2    01234   Function of entity
 a       R       Place of production, publication, distribution, manufacture
 b       R       Name of producer, publisher, distributor, manufacturer
@@ -764,25 +764,12 @@ z       R       Geographic subdivision
 2       NR      Source of term 
 9       R       AutoSE 
 
-653     R       Indexierungsbegriff - unkontrollierft
-ind1    blank   Keine Information vorhande
-ind2    blank   Nicht definiert
-a       R       Unkontrolliertes Schlagwort 
-b       R       Unkontrolliertes Schlagwort / untergeordnete Körperschaft
-c       NR      Ort der Veranstaltung oder der Körperschaft
-d       NR      Datum der Veranstaltung oder Lebensdaten 
-e       NR      Institutionskürzel 
-g       NR      Sonstige Informationen
-n       NR      Kongresszählung 
-v       NR      Formschlagwort 
-x       R       Code des Lieferanten / unkontrolliertes Schagwort
-y       NR      Zeitangabe 
-z       NR      Ort
-0       R       Kontrollnummer des Autoritätsdatensatzes 
-1       R       Kontrollnummer des Autoritätsdatensatzes 
-2       NR      Quelle des Schlagworts/der Benennung 
-8       R       Dewey 
-9       NR      Sprachcode
+653     R       INDEX TERM--UNCONTROLLED
+ind1    b012    Level of index term
+ind2    b0123456   Type of term or name
+a       R       Uncontrolled term 
+6       NR      Linkage 
+8       R       Field link and sequence number 
 
 659     R       Indexierungsbegriff - unkontrollierft
 ind1    blank   Keine Information vorhande
