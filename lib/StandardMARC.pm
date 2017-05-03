@@ -11,6 +11,26 @@ use namespace::autoclean;
 use String::Util qw(trim);
 use Data::Dumper;
 
+# MARC
+use MARC::File::USMARC;
+use MARC::Record;
+use MARC::Field;
+
+# lib modules
+use lib 'lib';
+use StandardMARC;
+use StandardBibId;
+use BsgMARC;
+use BsgBibId;
+use SbMARC;
+use SbBibId;
+use NbMARC;
+use NbBibId;
+
+use F001;
+use MARCWarnings;
+use MyConfig;
+
 has 'tags' => (
 				is      => 'ro',
 				isa     => 'HashRef',
@@ -18,11 +38,11 @@ has 'tags' => (
 				builder => '_tags'
 );
 
-has 'marcfile' => (
-				is      => 'ro',
-				isa     => 'Str',
-				lazy    => 1,
-				builder => '_set_marcfile'
+has 'valid_data_file' => (
+						   is      => 'ro',
+						   isa     => 'Str',
+						   lazy    => 1,
+						   builder => '_set_valid_data_file'
 );
 
 sub _tags
@@ -31,8 +51,7 @@ sub _tags
 	my @tag_array;
 	my %tag_hash;
 	local $/ = "\n\n";
-#	my $data_file = "data/STANDARD_MARC";
-my $data_file = $self->marcfile;
+	my $data_file = $self->valid_data_file;
 	open my $data_fh, "<:utf8", $data_file;
 
 	while ( my $block = <$data_fh> )
@@ -83,25 +102,37 @@ my $data_file = $self->marcfile;
 	return \%tag_hash;
 }
 
-sub _ind_value
+sub ind_value
 {
+	my $self      = shift;
 	my $ind_value = shift;
-
-	#	say "-----------------> 1: |$ind_value|";
+	my @ind_array;
 	$ind_value =~ s/^blank$/ /;
-
-	#	say "-----------------> 2: |$ind_value|";
 	$ind_value =~ s/b/ /;
-
-	#	say "-----------------> 3: |$ind_value|";
-	my @ind_array = split '', $ind_value;
-
-	#			say "------------------ ind_array:> ".join('',@ind_array);
+	if ( $ind_value =~ /^(\d)-(\d)$/ )
+	{
+		my $from  = substr $ind_value, 0, 1;
+		my $until = substr $ind_value, 2, 1;
+		for ( my $a = $from ; $a <= $until ; $a++ )
+		{
+			push @ind_array, $a;
+		}
+		return @ind_array;
+	}
+	
+	@ind_array = split '', $ind_value;
 	return @ind_array;
 }
 
-sub _set_marcfile {
-	return "data/STANDARD_MARC";
+sub _set_valid_data_file
+{
+	my $config = MyConfig->new();
+	return $config->datadir() . "STANDARD_MARC";
+}
+
+sub check_local
+{
+	my $self     = shift;
 }
 
 __PACKAGE__->meta->make_immutable;
