@@ -13,59 +13,67 @@ use MARC::Field;
 
 # lib modules
 use lib 'lib';
+
+use F001;
+use MARCWarnings;
+use MyConfig;
 use StandardMARC;
-use StandardBibId;
-use BsgMARC;
-use BsgBibId;
-use SbMARC;
-use SbBibId;
-use NbMARC;
-use NbBibId;
+
+my $f001     = F001->new();
+my $warnings = MARCWarnings->new();
+my @header   = ( 'BIB_ID', 'FELD', 'IND/UF/POS', 'FELDINHALT', 'PROBLEM' );
+
+$warnings->add_warning( \@header );
+my $config = MyConfig->new();
 
 # Marc file
 my $marcfile = shift;
-$marcfile = "mrc/$marcfile";
-my $rule = shift;
-my @rules = ( "Standard", "Bsg", "Sb", "Nb" );
-unless ( grep /^$rule$/, @rules )
+chomp $marcfile;
+my $rules = shift;
+chomp $rules;
+my @rules_defined = ( "Standard", "Bsg", "Sb", "Nb" );
+if ( defined $marcfile && defined $rules )
+{
+	my @rules_defined = ( "Standard", "Bsg", "Sb", "Nb" );
+	unless ( grep /^$rules$/, @rules_defined )
+	{
+		say "Usage: 'perl validate.pl [filename].mrc Standard|Nb|Sb|Bsg'";
+		exit -1;
+	}
+} else
 {
 	say "Usage: 'perl validate.pl [filename].mrc Standard|Nb|Sb|Bsg'";
 	exit -1;
+
 }
+$marcfile = $config->marcdir . $marcfile;
+chomp $marcfile;
+my $warningsfile = $config->warningsdir . "Warnings_" . $rules . ".txt";
+chomp $warningsfile;
 
-# Warnings
-my $bib_id    = "BIB_ID";
-my $tag       = "TAG";
-my $ind_or_sf = "IND/SF";
-my $content = "CONTENT";
-my $problem   = "PROBLEM";
-my @warnings  = ( $bib_id, $tag, $ind_or_sf, $content, $problem );
+my $fh_warnings = IO::File->new( $warningsfile, '>:utf8' );
+my $fh_marc     = IO::File->new( $marcfile,     '<:utf8' );
 
-#my @warnings_heading = ( $bib_id, $tag, $ind_or_sf, $problem );
-my $fh_warnings = IO::File->new( $rule . "_warnings.txt", '>:utf8' );
-say $fh_warnings join "\t", @warnings;
+my $marc_rule = "${\$rules}MARC"->new();
+my %marc      = %{ $marc_rule->tags };
 
 my $i       = 1;
-my $records = MARC::File::USMARC->in($marcfile);
+my $records = MARC::File::USMARC->in($fh_marc);
 while ( my $record = $records->next() )
 {
+	$f001->set_bib_id( $record->field('001')->as_string, $warnings );
+	say "Record no $i: BibId " . $f001->bib_id;
 
-	my $ctr_no = "${\$rule}BibId"->new();
-	@warnings = $ctr_no->set_bib_id( $record->field('001')->as_string() );
-	$bib_id   = $ctr_no->bib_id;
-	say "Record no $i: BibId " . $ctr_no->bib_id;
-	if (@warnings) { say $fh_warnings join "\t", @warnings; }
-
-	###############################
-	my $marc_rule = "${\$rule}MARC"->new();
-	my %marc      = %{ $marc_rule->tags };
-
-	#	say Dumper %marc{'245'};
 	my @fields = $record->fields();
 
 	foreach my $field (@fields)
 	{
-		$tag = $field->tag();
+		my $tag       = $field->tag();
+		my $ind_or_sf = '-';
+		my $content   = '-';
+		my $problem   = '-';
+		my @message;
+
 		if ( exists $marc{$tag}{$tag} )
 		{
 			my @_tags = $record->field($tag);
@@ -73,16 +81,16 @@ while ( my $record = $records->next() )
 			{
 				$ind_or_sf = '-';
 				$problem   = "Feld $tag ist nicht wiederholbar.";
-				@warnings  = ( $bib_id, $tag, $ind_or_sf, $content, $problem );
-				say $fh_warnings join "\t", @warnings;
+				my @message =
+				  ( $f001->bib_id, $tag, $ind_or_sf, $content, $problem );
+				$warnings->add_warning( \@message );
 			}
 
 			# ohne Kontrollfelder
 			unless ( $tag < 10 )
 			{
-				my @subfields = $field->subfields();
-
-				#				say Dumper @subfields;
+				my @subfields  = $field->subfields();
+				my $sf_counter = 1;
 				foreach my $subfield (@subfields)
 				{
 					my ( $code, $data ) = @$subfield;
@@ -92,41 +100,92 @@ while ( my $record = $records->next() )
 						if ( $marc{$tag}{$code} eq 'NR' && scalar @_sf > 1 )
 						{
 							$ind_or_sf = $code;
-							$content = $data;
+							$content   = $data;
 							$problem = "Unterfeld $code ist nicht wiederholbar";
-							@warnings = ( $bib_id, $tag, $ind_or_sf, $content, $problem );
-							say $fh_warnings join "\t", @warnings;
-
+							my @message = (
+									  $f001->bib_id, $tag, $ind_or_sf, $content,
+									  $problem
+							);
+							$warnings->add_warning( \@message );
 						}
 					} else
 					{
 						$ind_or_sf = $code;
-						$content = $data;
+						$content   = $data;
 						$problem   = "Unterfeld $code ist nicht definiert.";
-						@warnings  = ( $bib_id, $tag, $ind_or_sf, $content,$problem );
-						say $fh_warnings join "\t", @warnings;
+						my @message = (
+										$f001->bib_id, $tag, $ind_or_sf,
+										$content, $problem
+						);
+						$warnings->add_warning( \@message );
 					}
+					$sf_counter++;
+				}
+
+				# Indikatoren
+				my $ind1      = $field->indicator(1);
+				my $ind2      = $field->indicator(2);
+				my @ind_array = $marc_rule->ind_value( $marc{$tag}{'ind1'} );
+				my $valid_ind = join ', ', @ind_array;
+				$valid_ind =~ s/^ $/blank/;
+				unless ( grep( /^$ind1/, @ind_array ) )
+				{
+					$ind_or_sf = 'I1';
+					$content   = $ind1;
+					$content =~ s/^ $/blank/;
+
+					$problem =
+"Indikator 1 ist: '$content'. Gültige Werte: '$valid_ind'";
+					my @message =
+					  ( $f001->bib_id, $tag, $ind_or_sf, $content, $problem );
+					$warnings->add_warning( \@message );
+				}
+
+				@ind_array = $marc_rule->ind_value( $marc{$tag}{'ind2'} );
+				$valid_ind = join ', ', @ind_array;
+				$valid_ind =~ s/^ $/blank/;
+				unless ( grep( /^$ind2/, @ind_array ) )
+				{
+					$ind_or_sf = 'I2';
+					$content   = $ind2;
+					$content =~ s/^ $/blank/;
+					$problem =
+"Indikator 2 ist: '$content'. Gültige Werte: '$valid_ind'";
+					my @message =
+					  ( $f001->bib_id, $tag, $ind_or_sf, $content, $problem );
+					$warnings->add_warning( \@message );
+
 				}
 			}
-
-			#			say $tag . ", ind2: ".$marc{$tag}{'ind2'};
 		} else
 		{
 			$ind_or_sf = '-';
-			$content = $field->as_string();
+			$content   = $field->as_string();
 			$problem   = "Feld $tag ist nicht definiert";
-			@warnings  = ( $bib_id, $tag, $ind_or_sf, $content, $problem );
-			say $fh_warnings join "\t", @warnings;
+			my @message =
+			  ( $f001->bib_id, $tag, $ind_or_sf, $content, $problem );
+			$warnings->add_warning( \@message );
 		}
 
 	}
-
+	
+	$marc_rule->check_local($record, $warnings, $f001->bib_id);
+	
 	$i++;
 }
 
+for my $x ( @{ $warnings->warnings } )
+{
+	say $fh_warnings join( "\t", @{$x} );
+}
+
 say '____________________________________________';
-say $i-1 ." ". $rule . "-Datensätze validiert.";
-say "Siehe " . $rule."_warnings.txt für die einzelnen Fehlermeldungen.";
+say '';
+say "Marc File: $marcfile";
+say "Data Dir: " . $marc_rule->valid_data_file;
+say "Warnings: $warningsfile";
+say '____________________________________________';
+say $i- 1 . " " . $rules . "-Datensätze validiert.";
 
 #TODO ps: Feld 034 $a hat feste Werte
 #TODO ps: Feldinhalte auf nichtdruckbare Zeichen überprüfen
