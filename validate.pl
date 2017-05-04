@@ -32,16 +32,14 @@ chomp $marcfile;
 my $rules = shift;
 chomp $rules;
 my @rules_defined = ( "Standard", "Bsg", "Sb", "Nb" );
-if ( defined $marcfile && defined $rules )
-{
+if ( defined $marcfile && defined $rules ) {
 	my @rules_defined = ( "Standard", "Bsg", "Sb", "Nb" );
-	unless ( grep /^$rules$/, @rules_defined )
-	{
+	unless ( grep /^$rules$/, @rules_defined ) {
 		say "Usage: 'perl validate.pl [filename].mrc Standard|Nb|Sb|Bsg'";
 		exit -1;
 	}
-} else
-{
+}
+else {
 	say "Usage: 'perl validate.pl [filename].mrc Standard|Nb|Sb|Bsg'";
 	exit -1;
 
@@ -59,26 +57,37 @@ my %marc      = %{ $marc_rule->tags };
 
 my $i       = 1;
 my $records = MARC::File::USMARC->in($fh_marc);
-while ( my $record = $records->next() )
-{
+while ( my $record = $records->next() ) {
 	$f001->set_bib_id( $record->field('001')->as_string, $warnings );
 	say "Record no $i: BibId " . $f001->bib_id;
 
 	my @fields = $record->fields();
 
-	foreach my $field (@fields)
-	{
+	foreach my $field (@fields) {
 		my $tag       = $field->tag();
 		my $ind_or_sf = '-';
 		my $content   = '-';
 		my $problem   = '-';
 		my @message;
 
-		if ( exists $marc{$tag}{$tag} )
-		{
+		my $field_as_string = $field->as_string;
+
+		# Feld auf nicht druckbare Zeichen überprüfen
+		if ( $field_as_string =~ m/(?![\x{0098}|\x{009C}])\p{C}/g ) {
+			$field_as_string =~ s/\p{C}/¬/g;
+			my $ind_or_sf = '-';
+			my $tag       = $field->tag;
+			my $content   = $field_as_string;
+			my $problem   = "Feld enthält nicht druckbare Zeichen.";
+			my @message =
+			  ( $f001->bib_id, $tag, $ind_or_sf, $content, $problem );
+			$warnings->add_warning( \@message );
+
+		}
+
+		if ( exists $marc{$tag}{$tag} ) {
 			my @_tags = $record->field($tag);
-			if ( $marc{$tag}{$tag} eq 'NR' && scalar @_tags > 1 )
-			{
+			if ( $marc{$tag}{$tag} eq 'NR' && scalar @_tags > 1 ) {
 				$ind_or_sf = '-';
 				$problem   = "Feld $tag ist nicht wiederholbar.";
 				my @message =
@@ -87,35 +96,30 @@ while ( my $record = $records->next() )
 			}
 
 			# ohne Kontrollfelder
-			unless ( $tag < 10 )
-			{
+			unless ( $tag < 10 ) {
 				my @subfields  = $field->subfields();
 				my $sf_counter = 1;
-				foreach my $subfield (@subfields)
-				{
+				foreach my $subfield (@subfields) {
 					my ( $code, $data ) = @$subfield;
 					my @_sf = $field->subfield($code);
-					if ( exists $marc{$tag}{$code} )
-					{
-						if ( $marc{$tag}{$code} eq 'NR' && scalar @_sf > 1 )
-						{
+					if ( exists $marc{$tag}{$code} ) {
+						if ( $marc{$tag}{$code} eq 'NR' && scalar @_sf > 1 ) {
 							$ind_or_sf = $code;
 							$content   = $data;
 							$problem = "Unterfeld $code ist nicht wiederholbar";
 							my @message = (
-									  $f001->bib_id, $tag, $ind_or_sf, $content,
-									  $problem
+								$f001->bib_id, $tag, $ind_or_sf, $content,
+								$problem
 							);
 							$warnings->add_warning( \@message );
 						}
-					} else
-					{
+					}
+					else {
 						$ind_or_sf = $code;
 						$content   = $data;
 						$problem   = "Unterfeld $code ist nicht definiert.";
 						my @message = (
-										$f001->bib_id, $tag, $ind_or_sf,
-										$content, $problem
+							$f001->bib_id, $tag, $ind_or_sf, $content, $problem
 						);
 						$warnings->add_warning( \@message );
 					}
@@ -128,8 +132,7 @@ while ( my $record = $records->next() )
 				my @ind_array = $marc_rule->ind_value( $marc{$tag}{'ind1'} );
 				my $valid_ind = join ', ', @ind_array;
 				$valid_ind =~ s/^ $/blank/;
-				unless ( grep( /^$ind1/, @ind_array ) )
-				{
+				unless ( grep( /^$ind1/, @ind_array ) ) {
 					$ind_or_sf = 'I1';
 					$content   = $ind1;
 					$content =~ s/^ $/blank/;
@@ -144,8 +147,7 @@ while ( my $record = $records->next() )
 				@ind_array = $marc_rule->ind_value( $marc{$tag}{'ind2'} );
 				$valid_ind = join ', ', @ind_array;
 				$valid_ind =~ s/^ $/blank/;
-				unless ( grep( /^$ind2/, @ind_array ) )
-				{
+				unless ( grep( /^$ind2/, @ind_array ) ) {
 					$ind_or_sf = 'I2';
 					$content   = $ind2;
 					$content =~ s/^ $/blank/;
@@ -157,8 +159,8 @@ while ( my $record = $records->next() )
 
 				}
 			}
-		} else
-		{
+		}
+		else {
 			$ind_or_sf = '-';
 			$content   = $field->as_string();
 			$problem   = "Feld $tag ist nicht definiert";
@@ -168,14 +170,14 @@ while ( my $record = $records->next() )
 		}
 
 	}
-	
-	$marc_rule->check_local($record, $warnings, $f001->bib_id);
-	
+
+	$marc_rule->check_language( $record, $warnings, $f001->bib_id );
+	$marc_rule->check_local( $record, $warnings, $f001->bib_id );
+
 	$i++;
 }
 
-for my $x ( @{ $warnings->warnings } )
-{
+for my $x ( @{ $warnings->warnings } ) {
 	say $fh_warnings join( "\t", @{$x} );
 }
 
@@ -187,5 +189,3 @@ say "Warnings: $warningsfile";
 say '____________________________________________';
 say $i- 1 . " " . $rules . "-Datensätze validiert.";
 
-#TODO ps: Feld 034 $a hat feste Werte
-#TODO ps: Feldinhalte auf nichtdruckbare Zeichen überprüfen

@@ -19,13 +19,9 @@ use MARC::Field;
 # lib modules
 use lib 'lib';
 use StandardMARC;
-use StandardBibId;
 use BsgMARC;
-use BsgBibId;
 use SbMARC;
-use SbBibId;
 use NbMARC;
-use NbBibId;
 
 use F001;
 use MARCWarnings;
@@ -133,7 +129,68 @@ sub _set_valid_data_file
 sub check_local
 {
 	my $self     = shift;
+	
 }
+
+sub check_language {
+	my $self = shift;
+	my $record   = new MARC::Record;
+	my $warnings = MARCWarnings->new();
+	( $record, $warnings, my $bib_id ) = @_;
+
+	my $config = MyConfig->new();
+	my $file   = $config->datadir() . "LANGUAGE_CODES";
+	my $fh     = IO::File->new( $file, '<:utf8' );
+	my @lang;
+	while (<$fh>) {
+		chomp;
+		push @lang, $_;
+	}
+
+	my $lang1 = $record->field('008')->as_string;
+	$lang1 = substr $lang1, 35, 3;
+	unless ( grep( /$lang1/, @lang ) ) {
+		my $ind_or_sf = '35-37';
+		my $tag       = '008';
+		my $content   = $lang1;
+		my $problem   = "Ungültiger Sprachencode.";
+		my @message = ( $bib_id, $tag, $ind_or_sf, $content, $problem );
+		$warnings->add_warning( \@message );
+	}
+
+	my @lang2;
+	my @f041 = $record->field('041');
+	if (@f041) {
+		foreach my $f041 (@f041) {
+			my @subfields = $f041->subfields();
+			foreach my $subfield (@subfields) {
+				my ( $code, $data ) = @$subfield;
+				if ( $code eq 'a' ) {
+					push @lang2, $data;
+					unless ( grep( /$data/, @lang ) ) {
+						my $ind_or_sf = $code;
+						my $tag       = '041';
+						my $content   = $data;
+						my $problem   = "Ungültiger Sprachencode.";
+						my @message =
+						  ( $bib_id, $tag, $ind_or_sf, $content, $problem );
+						$warnings->add_warning( \@message );
+					}
+				}
+			}
+		}
+		unless ( grep( /$lang1/, @lang2 ) ) {
+			my $ind_or_sf = "-";
+			my $tag       = '041';
+			my $content   = "'$lang1'/'@lang2'";
+			my $problem   = "Sprachencode in 008 nicht in 041a.";
+			my @message   = ( $bib_id, $tag, $ind_or_sf, $content, $problem );
+			$warnings->add_warning( \@message );
+		}
+	}
+}
+
+
 
 __PACKAGE__->meta->make_immutable;
 1;
