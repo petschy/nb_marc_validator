@@ -69,21 +69,23 @@ while ( my $record = $records->next() ) {
 		my $content   = '-';
 		my $problem   = '-';
 		my @message;
+		
+		$marc_rule->non_printable_characters($field, $warnings, $f001->bib_id);
 
-		my $field_as_string = $field->as_string;
-
-		# Feld auf nicht druckbare Zeichen überprüfen
-		if ( $field_as_string =~ m/(?![\x{0098}|\x{009C}])\p{C}/g ) {
-			$field_as_string =~ s/\p{C}/¬/g;
-			my $ind_or_sf = '-';
-			my $tag       = $field->tag;
-			my $content   = $field_as_string;
-			my $problem   = "Feld enthält nicht druckbare Zeichen.";
-			my @message =
-			  ( $f001->bib_id, $tag, $ind_or_sf, $content, $problem );
-			$warnings->add_warning( \@message );
-
-		}
+#		my $field_as_string = $field->as_string;
+#
+#		# Feld auf nicht druckbare Zeichen überprüfen
+#		if ( $field_as_string =~ m/(?![\x{0098}|\x{009C}])\p{C}/g ) {
+#			$field_as_string =~ s/\p{C}/¬/g;
+#			my $ind_or_sf = '-';
+#			my $tag       = $field->tag;
+#			my $content   = $field_as_string;
+#			my $problem   = "Feld enthält nicht druckbare Zeichen.";
+#			my @message =
+#			  ( $f001->bib_id, $tag, $ind_or_sf, $content, $problem );
+#			$warnings->add_warning( \@message );
+#
+#		}
 
 		if ( exists $marc{$tag}{$tag} ) {
 			my @_tags = $record->field($tag);

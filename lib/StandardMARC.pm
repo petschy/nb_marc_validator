@@ -115,7 +115,7 @@ sub ind_value
 		}
 		return @ind_array;
 	}
-	
+
 	@ind_array = split '', $ind_value;
 	return @ind_array;
 }
@@ -128,12 +128,13 @@ sub _set_valid_data_file
 
 sub check_local
 {
-	my $self     = shift;
-	
+	my $self = shift;
+
 }
 
-sub check_language {
-	my $self = shift;
+sub check_language
+{
+	my $self     = shift;
 	my $record   = new MARC::Record;
 	my $warnings = MARCWarnings->new();
 	( $record, $warnings, my $bib_id ) = @_;
@@ -142,32 +143,39 @@ sub check_language {
 	my $file   = $config->datadir() . "LANGUAGE_CODES";
 	my $fh     = IO::File->new( $file, '<:utf8' );
 	my @lang;
-	while (<$fh>) {
+	while (<$fh>)
+	{
 		chomp;
 		push @lang, $_;
 	}
 
 	my $lang1 = $record->field('008')->as_string;
 	$lang1 = substr $lang1, 35, 3;
-	unless ( grep( /$lang1/, @lang ) ) {
+	unless ( grep( /$lang1/, @lang ) )
+	{
 		my $ind_or_sf = '35-37';
 		my $tag       = '008';
 		my $content   = $lang1;
 		my $problem   = "Ungültiger Sprachencode.";
-		my @message = ( $bib_id, $tag, $ind_or_sf, $content, $problem );
+		my @message   = ( $bib_id, $tag, $ind_or_sf, $content, $problem );
 		$warnings->add_warning( \@message );
 	}
 
 	my @lang2;
 	my @f041 = $record->field('041');
-	if (@f041) {
-		foreach my $f041 (@f041) {
+	if (@f041)
+	{
+		foreach my $f041 (@f041)
+		{
 			my @subfields = $f041->subfields();
-			foreach my $subfield (@subfields) {
+			foreach my $subfield (@subfields)
+			{
 				my ( $code, $data ) = @$subfield;
-				if ( $code eq 'a' ) {
+				if ( $code eq 'a' )
+				{
 					push @lang2, $data;
-					unless ( grep( /$data/, @lang ) ) {
+					unless ( grep( /$data/, @lang ) )
+					{
 						my $ind_or_sf = $code;
 						my $tag       = '041';
 						my $content   = $data;
@@ -179,7 +187,8 @@ sub check_language {
 				}
 			}
 		}
-		unless ( grep( /$lang1/, @lang2 ) ) {
+		unless ( grep( /$lang1/, @lang2 ) )
+		{
 			my $ind_or_sf = "-";
 			my $tag       = '041';
 			my $content   = "'$lang1'/'@lang2'";
@@ -190,7 +199,54 @@ sub check_language {
 	}
 }
 
+sub non_printable_characters
+{
+	my $self = shift;
 
+	#	my $field = new MARC::Field;
+	my $warnings = MARCWarnings->new();
+	( my $field, $warnings, my $bib_id ) = @_;
+
+	my $field_as_string = $field->as_string;
+
+	my $regex = '(?![\x{0098}|\x{009C}])\p{C}';
+
+	my @characters = split //, $field_as_string;
+
+	my $print_warning = 0;
+	foreach my $character (@characters)
+	{
+		if ( $character =~ /$regex/g )
+		{
+			$print_warning = 1;
+			my $replace = "[" . charnames::viacode( ord($character) ) . "]";
+			$field_as_string =~ s/$character/$replace/;
+		}
+	}
+	if ($print_warning)
+	{
+		my $ind_or_sf = '-';
+		my $tag       = $field->tag;
+		my $content   = $field_as_string;
+		my $problem   = "Feld enthält nicht druckbare Zeichen.";
+		my @message   = ( $bib_id, $tag, $ind_or_sf, $content, $problem );
+		$warnings->add_warning( \@message );
+	}
+
+	# Feld auf nicht druckbare Zeichen überprüfen
+	#	if ( $field_as_string =~ m/(?![\x{0098}|\x{009C}])\p{C}/g )
+	#	{
+	#		$field_as_string =~ s/\p{C}/¬/g;
+	#		my $ind_or_sf = '-';
+	#		my $tag       = $field->tag;
+	#		my $content   = $field_as_string;
+	#		my $problem   = "Feld enthält nicht druckbare Zeichen.";
+	#		my @message   = ( $bib_id, $tag, $ind_or_sf, $content, $problem );
+	#		$warnings->add_warning( \@message );
+	#
+	#	}
+
+}
 
 __PACKAGE__->meta->make_immutable;
 1;
