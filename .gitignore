@@ -20,3 +20,7 @@ nytprof.out
 /_eumm/
 
 *.mrc
+/warnings/
+/docs/
+/mrc/
+*_warnings.txt
