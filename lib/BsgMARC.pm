@@ -166,12 +166,20 @@ sub _ckeck_language_of_record {
 						}
 
 					}
-					elsif ( $lang eq 'fre' || $lang eq 'spa' || $lang eq 'cat' || $lang eq 'glg' || $lang eq 'rum' ) {
+					elsif ($lang eq 'fre'
+						|| $lang eq 'frm'
+						|| $lang eq 'lat'
+						|| $lang eq 'spa'
+						|| $lang eq 'cat'
+						|| $lang eq 'glg'
+						|| $lang eq 'por'
+						|| $lang eq 'rum' )
+					{
 						unless ( grep( /$data/, @fre ) ) {
 							my $ind_or_sf = $code;
 							my $tag       = '504';
 							my $content   = $data;
-							my $problem =
+							my $problem 	=
 "Falsche Sprache (008:$lang) oder Typo in Fussnote.";
 							my @message =
 							  ( $bib_id, $tag, $ind_or_sf, $content, $problem );
