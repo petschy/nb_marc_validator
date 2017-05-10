@@ -95,7 +95,7 @@ c       R       Terms of availability
 
 039     R      Bearbeitungsdatum und Kürzel des Katalogisierenden (Virtua) 
 ind1    blank   Undefined
-ind2    9       Undefined
+ind2    b9       Undefined
 a       NR      Datum der letzten Änderung 
 b       R      Kürzel der Person, die die letzte Änderung gemacht hat  
 c       R       Datum der vorigen Änderung  
