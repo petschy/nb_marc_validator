@@ -47,7 +47,7 @@ sub _check_264
 	{
 		foreach my $field (@f264)
 		{
-			if ( $field->indicator(2) == '4' )
+			if ( $field->indicator(2) eq '4' )
 			{
 				my @subfields = $field->subfields();
 				my @codes;
