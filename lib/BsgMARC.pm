@@ -29,7 +29,8 @@ sub check_local {
 	&_check_264( $record, $warnings, $bib_id );
 	&_check_kapitel( $record, $warnings, $bib_id );
 	&_check_zeitcode( $record, $warnings, $bib_id );
-	&_ckeck_language_of_record( $record, $warnings, $bib_id );
+	&_check_language_of_record( $record, $warnings, $bib_id );
+	&_check_ill( $record, $warnings, $bib_id );
 
 }
 
@@ -100,6 +101,37 @@ sub _check_kapitel {
 
 }
 
+sub _check_ill {
+
+	my $record   = new MARC::Record;
+	my $warnings = MARCWarnings->new();
+	( $record, $warnings, my $bib_id ) = @_;
+	my @field = $record->field('300');
+	if (@field) {
+		foreach my $field (@field) {
+			my @subfields = $field->subfields();
+			foreach my $subfield (@subfields) {
+				my ( $code, $data ) = @$subfield;
+#				say "code: $code ; data: $data";
+				if ( $data =~ m/ill|Ill/ ) {
+#					say "gefunden";
+					unless ( $code eq 'b' ) {
+#						say "unless";
+						my $ind_or_sf = $code;
+						my $tag       = '300';
+						my $content   = $data;
+						my $problem   = "Ill. in falschem Unterfeld";
+						my @message =
+						  ( $bib_id, $tag, $ind_or_sf, $content, $problem );
+						$warnings->add_warning( \@message );
+
+					}
+				}
+			}
+		}
+	}
+}
+
 sub _check_zeitcode {
 	my $record   = new MARC::Record;
 	my $warnings = MARCWarnings->new();
@@ -136,7 +168,7 @@ sub _check_zeitcode {
 	}
 }
 
-sub _ckeck_language_of_record {
+sub _check_language_of_record {
 	my $record   = new MARC::Record;
 	my $warnings = MARCWarnings->new();
 	( $record, $warnings, my $bib_id ) = @_;
@@ -179,7 +211,7 @@ sub _ckeck_language_of_record {
 							my $ind_or_sf = $code;
 							my $tag       = '504';
 							my $content   = $data;
-							my $problem 	=
+							my $problem =
 "Falsche Sprache (008:$lang) oder Typo in Fussnote.";
 							my @message =
 							  ( $bib_id, $tag, $ind_or_sf, $content, $problem );
