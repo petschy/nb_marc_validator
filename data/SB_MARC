@@ -3217,6 +3217,72 @@ ind2    blank   Undefined
 a       NR      Item-ID SW
 b       NR       Band-/Folgebezeichnung
 
+949		R		Virtua-Feld: Item-Information
+ind1    blank   Undefined
+ind2    blank   Undefined
+A		R
+B       R     
+C		R
+D       R     
+E		R
+F       R      
+G       R      
+H		R
+I		R
+J       R    
+K       R      
+L		R
+M       R     
+N		R
+G       R     
+O		R
+P       R      
+Q		R
+R		R
+S       R    
+T		R
+U       R     
+V		R
+W       R     
+X		R
+Y       R      
+Z       R      
+a		R
+b		R
+c       R    
+d       R      
+e		R
+f       R     
+g		R
+h       R     
+i		R
+j       R      
+k		R
+l		R
+m       R    
+n		R
+o		R
+p       R    
+q       R      
+r		R
+s       R     
+u		R
+v       R     
+w		R
+x       R      
+y		R
+z		R
+0		R
+1		R
+2       R    
+3       R     
+4		R
+5       R      
+6		R
+7		R
+8		R
+9       R    
+
 960     R       SACHKATALOG: LOKALES PERSONENSCHLAGWORT
 ind1    0123   Undefined
 ind2    9       Lokales Schlagwort
