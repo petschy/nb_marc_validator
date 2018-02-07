@@ -18,6 +18,8 @@ nytprof.out
 *.o
 *.bs
 /_eumm/
+.metadata/
+.settings/
 
 *.mrc
 /warnings/
