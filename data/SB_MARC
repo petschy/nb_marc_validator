@@ -478,7 +478,7 @@ z       R       Canceled/invalid GPO item number
 8       R       Field link and sequence number 
 
 080     R       UNIVERSAL DECIMAL CLASSIFICATION NUMBER
-ind1    01      Type of edition
+ind1    b01     Type of edition
 ind2    blank   Undefined
 a       NR      Universal Decimal Classification number 
 b       NR      Item number 
