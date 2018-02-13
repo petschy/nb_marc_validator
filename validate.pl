@@ -21,7 +21,7 @@ use StandardMARC;
 
 my $f001     = F001->new();
 my $warnings = MARCWarnings->new();
-my @header   = ( 'BIB_ID', 'FELD', 'IND/UF/POS', 'FELDINHALT', 'PROBLEM' );
+my @header   = ( 'FEHLER', 'BIB_ID', 'FELD', 'IND/UF/POS', 'FELDINHALT', 'HINWEIS' );
 
 $warnings->add_warning( \@header );
 my $config = MyConfig->new();
@@ -52,6 +52,14 @@ chomp $warningsfile;
 my $fh_warnings = IO::File->new( $warningsfile, '>:utf8' );
 my $fh_marc     = IO::File->new( $marcfile,     '<:utf8' );
 
+my $file = $config->datadir() . "ARTIKEL";
+my $fh = IO::File->new( $file, '<:utf8' );
+my @article;
+while (<$fh>) {
+	chomp;
+	push @article, $_;
+}
+
 my $marc_rule = "${\$rules}MARC"->new();
 my %marc      = %{ $marc_rule->tags };
 
@@ -64,36 +72,25 @@ while ( my $record = $records->next() ) {
 	my @fields = $record->fields();
 
 	foreach my $field (@fields) {
+		my $error     = '-';
 		my $tag       = $field->tag();
 		my $ind_or_sf = '-';
 		my $content   = '-';
 		my $problem   = '-';
 		my @message;
-		
-		$marc_rule->non_printable_characters($field, $warnings, $f001->bib_id);
 
-#		my $field_as_string = $field->as_string;
-#
-#		# Feld auf nicht druckbare Zeichen überprüfen
-#		if ( $field_as_string =~ m/(?![\x{0098}|\x{009C}])\p{C}/g ) {
-#			$field_as_string =~ s/\p{C}/¬/g;
-#			my $ind_or_sf = '-';
-#			my $tag       = $field->tag;
-#			my $content   = $field_as_string;
-#			my $problem   = "Feld enthält nicht druckbare Zeichen.";
-#			my @message =
-#			  ( $f001->bib_id, $tag, $ind_or_sf, $content, $problem );
-#			$warnings->add_warning( \@message );
-#
-#		}
+		$marc_rule->non_printable_characters( $field, $warnings,
+			$f001->bib_id );
 
 		if ( exists $marc{$tag}{$tag} ) {
 			my @_tags = $record->field($tag);
 			if ( $marc{$tag}{$tag} eq 'NR' && scalar @_tags > 1 ) {
+				$error     = "MARC";
 				$ind_or_sf = '-';
 				$problem   = "Feld $tag ist nicht wiederholbar.";
-				my @message =
-				  ( $f001->bib_id, $tag, $ind_or_sf, $content, $problem );
+				my @message = (
+					$error, $f001->bib_id, $tag, $ind_or_sf, $content, $problem
+				);
 				$warnings->add_warning( \@message );
 			}
 
@@ -106,22 +103,25 @@ while ( my $record = $records->next() ) {
 					my @_sf = $field->subfield($code);
 					if ( exists $marc{$tag}{$code} ) {
 						if ( $marc{$tag}{$code} eq 'NR' && scalar @_sf > 1 ) {
+							$error     = "MARC";
 							$ind_or_sf = $code;
 							$content   = $data;
 							$problem = "Unterfeld $code ist nicht wiederholbar";
 							my @message = (
-								$f001->bib_id, $tag, $ind_or_sf, $content,
-								$problem
+								$error, $f001->bib_id, $tag, $ind_or_sf, 
+								$content, $problem
 							);
 							$warnings->add_warning( \@message );
 						}
 					}
 					else {
+						$error     = "MARC";
 						$ind_or_sf = $code;
 						$content   = $data;
 						$problem   = "Unterfeld $code ist nicht definiert.";
 						my @message = (
-							$f001->bib_id, $tag, $ind_or_sf, $content, $problem
+							$error, $f001->bib_id, $tag, $ind_or_sf, $content,
+							$problem
 						);
 						$warnings->add_warning( \@message );
 					}
@@ -135,14 +135,16 @@ while ( my $record = $records->next() ) {
 				my $valid_ind = join ', ', @ind_array;
 				$valid_ind =~ s/^ $/blank/;
 				unless ( grep( /^$ind1/, @ind_array ) ) {
+					$error     = "MARC";
 					$ind_or_sf = 'I1';
 					$content   = $ind1;
 					$content =~ s/^ $/blank/;
-
 					$problem =
 "Indikator 1 ist: '$content'. Gültige Werte: '$valid_ind'";
-					my @message =
-					  ( $f001->bib_id, $tag, $ind_or_sf, $content, $problem );
+					my @message = (
+						$error, $f001->bib_id, $tag, $ind_or_sf, $content,
+						$problem
+					);
 					$warnings->add_warning( \@message );
 				}
 
@@ -150,30 +152,36 @@ while ( my $record = $records->next() ) {
 				$valid_ind = join ', ', @ind_array;
 				$valid_ind =~ s/^ $/blank/;
 				unless ( grep( /^$ind2/, @ind_array ) ) {
+					$error     = "MARC";
 					$ind_or_sf = 'I2';
 					$content   = $ind2;
 					$content =~ s/^ $/blank/;
 					$problem =
 "Indikator 2 ist: '$content'. Gültige Werte: '$valid_ind'";
-					my @message =
-					  ( $f001->bib_id, $tag, $ind_or_sf, $content, $problem );
+					my @message = (
+						$error, $f001->bib_id, $tag, $ind_or_sf, $content,
+						$problem
+					);
 					$warnings->add_warning( \@message );
 
 				}
 			}
 		}
 		else {
+			$error     = "MARC";
 			$ind_or_sf = '-';
 			$content   = $field->as_string();
 			$problem   = "Feld $tag ist nicht definiert";
 			my @message =
-			  ( $f001->bib_id, $tag, $ind_or_sf, $content, $problem );
+			  ( $error, $f001->bib_id, $tag, $ind_or_sf, $content, $problem );
 			$warnings->add_warning( \@message );
 		}
 
 	}
 
 	$marc_rule->check_language( $record, $warnings, $f001->bib_id );
+	$marc_rule->check_245( $record, $warnings, $f001->bib_id, @article );
+	$marc_rule->check_264( $record, $warnings, $f001->bib_id );
 	$marc_rule->check_local( $record, $warnings, $f001->bib_id );
 
 	$i++;

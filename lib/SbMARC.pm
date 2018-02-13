@@ -27,39 +27,10 @@ sub check_local {
 	my $warnings = MARCWarnings->new();
 	( $record, $warnings, my $bib_id ) = @_;
 
-	&_check_264( $record, $warnings, $bib_id );
 	&_check_sachgruppen( $record, $warnings, $bib_id );
 
 }
 
-
-sub _check_264 {
-	my $record   = new MARC::Record;
-	my $warnings = MARCWarnings->new();
-	( $record, $warnings, my $bib_id ) = @_;
-	my @f264 = $record->field('264');
-	if (@f264) {
-		foreach my $field (@f264) {
-			if ( $field->indicator(2) eq '4' ) {
-				my @subfields = $field->subfields();
-				my @codes;
-				foreach my $subfield (@subfields) {
-					my ( $code, $data ) = @$subfield;
-					unless ( $code eq 'c' ) {
-						my $ind_or_sf = $code;
-						my $tag       = '264';
-						my $content   = $field->as_string();
-						my $problem =
-						  "Nur Unterfeld c ist erlaubt (2. Indikator = 4).";
-						my @message =
-						  ( $bib_id, $tag, $ind_or_sf, $content, $problem );
-						$warnings->add_warning( \@message );
-					}
-				}
-			}
-		}
-	}
-}
 
 sub _check_sachgruppen {
 	my $record   = new MARC::Record;
@@ -86,12 +57,13 @@ sub _check_sachgruppen {
 				if ( $code eq 'c' ) {
 					push @a993, $data;
 					unless ( grep( /$data/, @sg ) ) {
+						my $error = "Sachgruppe";
 						my $ind_or_sf = $code;
 						my $tag       = '993';
 						my $content   = $data;
 						my $problem   = "Ungültige Sachgruppe.";
 						my @message =
-						  ( $bib_id, $tag, $ind_or_sf, $content, $problem );
+						  ( $error, $bib_id, $tag, $ind_or_sf, $content, $problem );
 						$warnings->add_warning( \@message );
 
 					}
@@ -111,12 +83,13 @@ sub _check_sachgruppen {
 					if ( $code eq 'a' ) {
 						push @a082, $data;
 						unless ( grep( /$data/, @sg ) ) {
+							my $error = "Sachgruppe";
 							my $ind_or_sf = $code;
 							my $tag       = '082';
 							my $content   = $data;
 							my $problem   = "Ungültige Sachgruppe.";
 							my @message =
-							  ( $bib_id, $tag, $ind_or_sf, $content, $problem );
+							  ( $error, $bib_id, $tag, $ind_or_sf, $content, $problem );
 							$warnings->add_warning( \@message );
 						}
 					}
@@ -126,11 +99,12 @@ sub _check_sachgruppen {
 	}
 
 	unless ( @a082 eq @a993 ) {
+		my $error = "Sachgruppe";
 		my $ind_or_sf = '-';
 		my $tag       = '082/993';
 		my $content   = "'@a082'/'@a993'";
 		my $problem   = "Unterschiedliche Sachgruppen in 082 und 993";
-		my @message   = ( $bib_id, $tag, $ind_or_sf, $content, $problem );
+		my @message   = ( $error, $bib_id, $tag, $ind_or_sf, $content, $problem );
 		$warnings->add_warning( \@message );
 	}
 }
