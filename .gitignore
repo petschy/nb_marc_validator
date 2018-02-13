@@ -20,6 +20,7 @@ nytprof.out
 /_eumm/
 .metadata/
 .settings/
+/temp/
 
 *.mrc
 /warnings/
