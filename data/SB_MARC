@@ -2268,6 +2268,27 @@ d       NR      Correlation factor
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
+659     R       Indexierungsbegriff – Unkontrolliert
+ind1    b012    Level of subject
+ind2    b       Undefined
+a       R       Unkontrolliertes Schlagwort
+b       R      
+c       R      
+d       R      
+e       R      
+g       R       
+v       R      
+x       R      
+y       R       
+z       R       
+0       R       
+2       R      
+3       R       
+4       R       
+6       R      
+8       R       
+9       R        
+
 662     R       SUBJECT ADDED ENTRY--HIERARCHICAL PLACE NAME
 ind1    blank   Undefined
 ind2    blank   Undefined
