@@ -3226,7 +3226,7 @@ c       R       Klassifikation
 d       NR      Spezifische Benmerkung
 k       R       Kantonscode
 
-901     NR       VERKNÜPFUNG ZUM ITEM RECORD EINER ANDEREN AUFNAHME
+901     R       VERKNÜPFUNG ZUM ITEM RECORD EINER ANDEREN AUFNAHME
 ind1    blank   Undefined
 ind2    blank   Undefined
 b       NR      Item-ID SW

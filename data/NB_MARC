@@ -1696,7 +1696,7 @@ ind2    blank   Undefined
 a       NR      Content of non-MARC field
 2       NR      Source of data
 
-901     NR       VERKNÜPFUNG ZUM ITEM RECORD EINER ANDEREN AUFNAHME
+901     R       VERKNÜPFUNG ZUM ITEM RECORD EINER ANDEREN AUFNAHME
 ind1    blank   Undefined
 ind2    blank   Undefined
 b       NR      Item-ID SW
