@@ -239,10 +239,17 @@ sub check_245 {
 	my $lang = $record->field('008')->as_string;
 	$lang = substr $lang, 35, 3;
 	my $regex = "^\\w* \|^\\w*'\|^\\w*-";
-
+		my $regex2 = "^\\w* \\\"\|^\\w*'\\\"\|^\\w*-\\\"";
 	if ( $title =~ m/$regex/g ) {
 		my $position = pos($title);
+		my $length_of_article = $position;
+		my $article_with_quote = 0;
 		my $art      = lc substr( $title, 0, $position );
+		# Anführungszeichen nach Artikel
+		if (substr($title, $position, 1) eq "\""){
+			$length_of_article ++;
+			$article_with_quote = 1;
+		}
 		my $key      = trim( $lang . "_" . $art );
 		if ( grep ( /^$key$/, @article ) ) {
 			if ( $ind2 == 0 ) {
@@ -256,13 +263,16 @@ sub check_245 {
 				  ( $error, $bib_id, $tag, $ind_or_sf, $content, $problem );
 				$warnings->add_warning( \@message );
 			}
-			elsif ( $ind2 != $position ) {
+			elsif ( $ind2 != $length_of_article ) {
+				if ($article_with_quote){
+					$art = $art."\"";
+				}
 				my $error     = "Artikel";
 				my $ind_or_sf = "I2";
 				my $tag       = $field->tag;
 				my $content   = $ind2;
 				my $problem =
-				  "'$art' hat Länge $position, aber Ind. 2 = $ind2 ($title)";
+				  "'$art' hat Länge $length_of_article, aber Ind. 2 = $ind2 ($title)";
 				my @message =
 				  ( $error, $bib_id, $tag, $ind_or_sf, $content, $problem );
 				$warnings->add_warning( \@message );
