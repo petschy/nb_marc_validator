@@ -28,17 +28,10 @@ ind1    blank   Undefined
 ind2    blank   Undefined
         NR      Undefined
 
-019     R       INTERNE BEMERKUNG
-ind1    012     Undefined
-ind2    blank   Undefined
-a       NR      Interne Bemerkung 
-5       NR      Datum der Bemerkung und Unterschrift  
-
 020     R       INTERNATIONAL STANDARD BOOK NUMBER
 ind1    blank   Undefined
 ind2    blank   Undefined
 a       NR      International Standard Book Number 
-c       NR      Terms of availability 
 q       R       Qualifying information
 z       R       Canceled/invalid ISBN 
 9       R       Gelöschte/ungültige ISBN mit Bindestrichen 
@@ -166,12 +159,6 @@ y       R       Table sequence number for internal subarrangement or add table
 z       R       Table identification
 6       NR      Linkage
 8       R       Field link and sequence number
-
-090     R       Lokale Datenverwaltung 
-ind1    blank   Undefined
-ind2    blank   Undefined
-a       NR      Signatur der NB 
-i       R       BenutzerInnen-Informationen 
 
 100     NR      MAIN ENTRY--PERSONAL NAME
 ind1    013     Type of personal name entry element
@@ -315,14 +302,8 @@ ind1    blank   Undefined
 ind2    blank   Undefined
 a       NR      Statement of scale 
 b       NR      Statement of projection 
-c       NR      Statement of coordinates 
 d       NR      Statement of zone 
 e       NR      Statement of equinox 
-
-256     NR      COMPUTER FILE CHARACTERISTICS
-ind1    blank   Undefined
-ind2    blank   Undefined
-a       NR      Computer file characteristics 
 
 260     R       PUBLICATION, DISTRIBUTION, ETC. (IMPRINT)
 ind1    b23     Sequence of publishing statements
@@ -367,7 +348,6 @@ b       NR      Dates of former publication frequency
 336     R       CONTENT TYPE
 ind1    blank   Undefined
 ind2    blank   Undefined
-a       R       Content type term
 b       R       Content type code
 2       NR      Source
 3       NR      Materials specified
@@ -375,7 +355,6 @@ b       R       Content type code
 337     R       MEDIA TYPE
 ind1    blank   Undefined
 ind2    blank   Undefined
-a       R       Media type term
 b       R       Media type code
 2       NR      Source
 3       NR      Materials specified
@@ -383,7 +362,6 @@ b       R       Media type code
 338     R       CARRIER TYPE
 ind1    blank   Undefined
 ind2    blank   Undefined
-a       R       Carrier type term
 b       R       Carrier type code
 2       NR      Source
 3       NR      Materials specified
@@ -392,13 +370,6 @@ b       R       Carrier type code
 ind1    01      Format of date
 ind2    blank   Undefined
 a       NR      Dates of publication and/or sequential designation 
-
-440     R       SERIES STATEMENT/ADDED ENTRY--TITLE [OBSOLETE]
-ind1    blank   Undefined
-ind2    0-9     Nonfiling characters
-a       NR      Title 
-v       NR      Volume number/sequential designation  
-w       R       Bibliographic record control number
 
 490     R       SERIES STATEMENT
 ind1    01      Specifies whether series is traced
@@ -602,20 +573,6 @@ ind1    blank   Keine Information vorhanden
 ind2    blank   Undefined
 a       NR      Source of description note
 
-592     R       Fussnote zur Kennzeichnung einer provisorischen Aufnahme
-ind1    blank   Undefined
-ind2    blank   Undefined
-a       NR      Fussnote
-
-595     R       Schweizerische geodätische Koordinaten
-ind1    blank   Undefined
-ind2    blank   Undefined
-d       NR      Schweizerische geodätische Koordinaten, westlichste Länge 
-e       NR      Schweizerische geodätische Koordinaten, östlichste Länge
-f       NR      Schweizerische geodätische Koordinaten, nördlichste Länge
-g       NR      Schweizerische geodätische Koordinaten, südlichste Länge
-h       NR      Bemerkung "Aufnahmestandort" 
-
 600     R       SUBJECT ADDED ENTRY--PERSONAL NAME
 ind1    013     Type of personal name entry element
 ind2    07      Thesaurus
@@ -715,13 +672,6 @@ z       R       Geographic subdivision
 2       NR      Source of heading or term 
 9       R       AutoSE 
 
-648     R       SUBJECT ADDED ENTRY--CHRONOLOGICAL TERM
-ind1    blank   Undefined
-ind2    07      Thesaurus
-a       NR      Chronological term 
-2       NR      Source of heading or term 
-9       R       AutoSE 
-
 650     R       SUBJECT ADDED ENTRY--TOPICAL TERM
 ind1    blank   Level of subject
 ind2    07      Thesaurus
@@ -758,7 +708,6 @@ ind2    07      Thesaurus
 a       NR      Genre/form data or focus term 
 v       R       Form subdivision 
 x       R       General subdivision 
-y       R       Chronological subdivision 
 z       R       Geographic subdivision 
 0       R       Authority record control number
 2       NR      Source of term 
@@ -770,75 +719,6 @@ ind2    b0123456   Type of term or name
 a       R       Uncontrolled term 
 6       NR      Linkage 
 8       R       Field link and sequence number 
-
-659     R       Indexierungsbegriff - unkontrollierft
-ind1    blank   Keine Information vorhande
-ind2    blank   Nicht definiert
-a       R       Unkontrolliertes Schlagwort 
-b       R       Unkontrolliertes Schlagwort / untergeordnete Körperschaft
-c       NR      Ort der Veranstaltung oder der Körperschaft
-d       NR      Datum der Veranstaltung oder Lebensdaten 
-e       NR      Institutionskürzel 
-g       NR      Sonstige Informationen
-n       NR      Kongresszählung 
-v       NR      Formschlagwort 
-x       R       Code des Lieferanten / unkontrolliertes Schagwort
-y       NR      Zeitangabe 
-z       NR      Ort
-0       R       Kontrollnummer des Autoritätsdatensatzes 
-1       R       Kontrollnummer des Autoritätsdatensatzes 
-2       NR      Quelle des Schlagworts/der Benennung 
-8       R       Dewey 
-9       NR      Sprachcode
-
-689     R       Schlagwortfolge RSWK
-ind1    0-9     Folge Nr
-ind2    0-9     SW Nr
-a       NR      Personal name 
-b       R      Numeration 
-c       R       Titles and other words associated with a name
-d       NR      Dates associated with a name 
-e       R       
-f       NR      Date of a work 
-g       R       Miscellaneous information 
-m       R       Medium of performance for music 
-n       R       Number of part/section of a work 
-o       NR      Arranged statement for music 
-p       R       Name of part/section of a work 
-r       NR      Key for music 
-s       NR      Version 
-t       NR      Title of a work 
-v       R       Form subdivision 
-x       R       General subdivision 
-y       R       Chronological subdivision 
-z       R       Geographic subdivision 
-0       R       Authority record control number
-D       NR      Source of heading or term 
-A       NR       AutoSE 
-
-690     R       Schlagwortfolge RSWK alt
-ind1    0-9     Folge Nr
-ind2    0-9     SW Nr
-a       NR      Personal name 
-b       NR      Numeration 
-c       R       Titles and other words associated with a name
-d       NR      Dates associated with a name 
-e       R       
-f       NR      Date of a work 
-g       R       Miscellaneous information 
-m       R       Medium of performance for music 
-n       R       Number of part/section of a work 
-o       NR      Arranged statement for music 
-p       R       Name of part/section of a work 
-r       NR      Key for music 
-s       NR      Version 
-t       NR      Title of a work 
-v       R       Form subdivision 
-x       R       General subdivision 
-y       R       Chronological subdivision 
-z       R       Geographic subdivision 
-0       R       Authority record control number
-2       NR      Source of heading or term 
 
 700     R       ADDED ENTRY--PERSONAL NAME
 ind1    013     Type of personal name entry element
@@ -930,15 +810,6 @@ x       NR      International Standard Serial Number
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
-720     R       ADDED ENTRY--UNCONTROLLED NAME
-ind1    b12     Type of name
-ind2    blank   Undefined
-a       NR      Name 
-e       R       Relator term 
-4       R       Relator code 
-6       NR      Linkage 
-8       R       Field link and sequence number 
-
 730     R       ADDED ENTRY--UNIFORM TITLE
 ind1    0-9     Nonfiling characters
 ind2    b2      Type of added entry
@@ -972,55 +843,6 @@ h       NR      Medium
 n       R       Number of part/section of a work 
 p       R       Name of part/section of a work 
 5       NR      Institution to which field applies 
-6       NR      Linkage 
-8       R       Field link and sequence number 
-
-751     R       ADDED ENTRY--GEOGRAPHIC NAME
-ind1    blank   Undefined
-ind2    blank   Undefined
-a       NR      Geographic name
-e       R       Relator term
-0       R       Authority record control number
-2       NR      Source of heading or term
-3       NR      Materials specified
-4       R       Relator code
-6       NR      Linkage
-8       R       Field link and sequence number
-
-752     R       ADDED ENTRY--HIERARCHICAL PLACE NAME
-ind1    blank   Undefined
-ind2    blank   Undefined
-a       NR      Country or larger entity
-b       NR      First-order political jurisdiction
-c       NR      Intermediate political jurisdiction
-d       NR      City
-f       R       City subsection
-g       R       Other nonjurisdictional geographic region and feature
-h       R       Extraterrestrial area
-0       R       Authority record control number
-2       NR      Source of heading or term
-6       NR      Linkage
-8       R       Field link and sequence number
-
-753     R       SYSTEM DETAILS ACCESS TO COMPUTER FILES
-ind1    blank   Undefined
-ind2    blank   Undefined
-a       NR      Make and model of machine 
-b       NR      Programming language 
-c       NR      Operating system 
-6       NR      Linkage 
-8       R       Field link and sequence number 
-
-754     R       ADDED ENTRY--TAXONOMIC IDENTIFICATION
-ind1    blank   Undefined
-ind2    blank   Undefined
-a       R       Taxonomic name 
-c       R       Taxonomic category 
-d       R       Common or alternative name 
-x       R       Non-public note 
-z       R       Public note 
-0       R       Authority record control number
-2       NR      Source of taxonomic identification 
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
@@ -1449,7 +1271,6 @@ s       NR      Version
 t       NR      Title of a work 
 u       NR      Affiliation 
 v       NR      Volume/sequential designation  
-w       R       Bibliographic record control number
 x       NR      International Standard Serial Number
 0       R       Authority record control number
 3       NR      Materials specified
@@ -1481,7 +1302,6 @@ s       NR      Version
 t       NR      Title of a work 
 u       NR      Affiliation 
 v       NR      Volume/sequential designation 
-w       R       Bibliographic record control number
 x       NR      International Standard Serial Number
 0       R       Authority record control number
 3       NR      Materials specified
@@ -1511,7 +1331,6 @@ s       NR      Version
 t       NR      Title of a work 
 u       NR      Affiliation 
 v       NR      Volume/sequential designation 
-w       R       Bibliographic record control number
 x       NR      International Standard Serial Number
 0       R       Authority record control number
 3       NR      Materials specified
@@ -1539,7 +1358,6 @@ r       NR      Key for music
 s       NR      Version 
 t       NR      Title of a work 
 v       NR      Volume/sequential designation 
-w       R       Bibliographic record control number
 x       NR      International Standard Serial Number
 0       R       Authority record control number
 3       NR      Materials specified
@@ -1547,57 +1365,6 @@ x       NR      International Standard Serial Number
 6       NR      Linkage 
 7       NR      Control subfield
 8       R       Field link and sequence number 
-
-841     NR      HOLDINGS CODED DATA VALUES
-
-842     NR      TEXTUAL PHYSICAL FORM DESIGNATOR
-
-843     R       REPRODUCTION NOTE
-
-844     NR      NAME OF UNIT
-
-845     R       TERMS GOVERNING USE AND REPRODUCTION NOTE
-
-850     R       HOLDING INSTITUTION
-ind1    blank   Undefined
-ind2    blank   Undefined
-a       R       Holding institution 
-8       R       Field link and sequence number 
-
-852     R       LOCATION
-ind1    b012345678    Shelving scheme
-ind2    b012    Shelving order
-a       NR      Location 
-b       R       Sublocation or collection 
-c       R       Shelving location 
-d       R       Former shelving location
-e       R       Address 
-f       R       Coded location qualifier 
-g       R       Non-coded location qualifier 
-h       NR      Classification part 
-i       R       Item part 
-j       NR      Shelving control number 
-k       R       Call number prefix 
-l       NR      Shelving form of title 
-m       R       Call number suffix 
-n       NR      Country code 
-p       NR      Piece designation 
-q       NR      Piece physical condition 
-s       R       Copyright article-fee code 
-t       NR      Copy number 
-u       R       Uniform Resource Identifier
-x       R       Nonpublic note 
-z       R       Public note 
-2       NR      Source of classification or shelving scheme 
-3       NR      Materials specified 
-6       NR      Linkage 
-8       NR      Sequence number 
-
-853     R       CAPTIONS AND PATTERN--BASIC BIBLIOGRAPHIC UNIT
-
-854     R       CAPTIONS AND PATTERN--SUPPLEMENTARY MATERIAL
-
-855     R       CAPTIONS AND PATTERN--INDEXES
 
 856     R       ELECTRONIC LOCATION AND ACCESS
 ind1    b012347    Access method
@@ -1631,142 +1398,6 @@ z       R       Public note
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
-863     R       ENUMERATION AND CHRONOLOGY--BASIC BIBLIOGRAPHIC UNIT
-
-864     R       ENUMERATION AND CHRONOLOGY--SUPPLEMENTARY MATERIAL
-
-865     R       ENUMERATION AND CHRONOLOGY--INDEXES
-
-866     R       TEXTUAL HOLDINGS--BASIC BIBLIOGRAPHIC UNIT
-
-867     R       TEXTUAL HOLDINGS--SUPPLEMENTARY MATERIAL
-
-868     R       TEXTUAL HOLDINGS--INDEXES
-
-876     R       ITEM INFORMATION--BASIC BIBLIOGRAPHIC UNIT
-
-877     R       ITEM INFORMATION--SUPPLEMENTARY MATERIAL
-
-878     R       ITEM INFORMATION--INDEXES
-
-880     R       ALTERNATE GRAPHIC REPRESENTATION
-ind1            Same as associated field
-ind2            Same as associated field
-6       NR      Linkage
-
-882     NR      REPLACEMENT RECORD INFORMATION
-ind1    blank   Undefined
-ind2    blank   Undefined
-a       R       Replacement title
-i       R       Explanatory text
-w       R       Replacement bibliographic record control number
-6       NR      Linkage
-8       R       Field link and sequence number
-
-883     R       MACHINE-GENERATED METADATA PROVENANCE
-ind1    b01     Type of field
-ind2    blank   Undefined
-a       NR      Generation process
-c       NR      Confidence value
-d       NR      Generation date
-q       NR      Generation agency
-x       NR      Validity end date
-u       NR      Uniform Resource Identifier
-w       R       Bibliographic record control number
-0       R       Authority record control number or standard number
-8       R       Field link and sequence number
-
-884     R       DESCRIPTION CONVERSION INFORMATION
-ind1    blank   Undefined
-ind2    blank   Undefined
-a       NR      Conversion process
-g       NR      Conversion date
-k       NR      Identifier of source metadata
-q       NR      Conversion agency
-u       R       Uniform Resource Identifier
-
-886     R       FOREIGN MARC INFORMATION FIELD
-ind1    012     Type of field
-ind2    blank   Undefined
-a       NR      Tag of the foreign MARC field
-b       NR      Content of the foreign MARC field
-c-z     NR      Foreign MARC subfield
-0-1     NR      Foreign MARC subfield
-2       NR      Source of data
-4       NR      Source of data
-3-9     NR      Source of data
-
-887     R       NON-MARC INFORMATION FIELD
-ind1    blank   Undefined
-ind2    blank   Undefined
-a       NR      Content of non-MARC field
-2       NR      Source of data
-
-901     NR       VERKNÜPFUNG ZUM ITEM RECORD EINER ANDEREN AUFNAHME
-ind1    blank   Undefined
-ind2    blank   Undefined
-b       NR      Item-ID SW
-v       R       Band-/Folgebezeichnung
-
-910     NR      MEDIUM
-ind1    blank   Undefined
-ind2    blank   Undefined
-a       NR      Item-ID SW
-b       NR       Band-/Folgebezeichnung
-
-960     R       SACHKATALOG: LOKALES PERSONENSCHLAGWORT
-ind1    0123   Undefined
-ind2    9       Lokales Schlagwort
-a       NR      Personenname
-b       NR      Zählung
-c       R       Titualturen
-d       NR      Lebensdaten
-
-961     R       SACHKATALOG: LOKALES GEOGR. SCHLAGWORT
-ind1    blank   Undefined
-ind2    9       Lokales Schlagwort
-a       NR      Lokales SW
-x       R       Allgemeine Unterteilung
-y       R       Chronologische Unterteilung
-
-968     R       SACHKATALOG: LOKALES SCHLAGWORT
-ind1    blank   Undefined
-ind2    9       Lokales Schlagwort
-a       NR      Lokales SW
-x       R       Allgemeine Unterteilung
-y       R       Chronologische Unterteilung
-z       R       Geografische Unterteilung
-9       NR      Dezimalklassifikation
-
-990     R      VERKNÜPFUNG VON VERSCHIEDENEN STUFEN
-ind1    blank   Undefined
-ind2    blank   Undefined
-a       NR      VTLS-Nummer eines Datensatzes höherer Stufe
-
-991     R       AUSWAHLCODES
-ind1    blank   Undefined
-ind2    blank   Undefined
-a       NR      Code des Produkts
-b       NR      Jahrgang und Heftnummer
-c       R       Klassifikation
-
-993     R       AUSWAHLCODE FÜR DAS SCHWEIZER BUCH
-ind1    blank   Undefined
-ind2    blank   Undefined
-a       NR      Code des Produkts
-b       NR      Jahrgang und Heftnummer
-c       R       Klassifikation
-d       NR      Spezifische Benmerkung
-k       R       Kantonscode
-
-994     R       AUSWAHLCODES
-ind1    blank   Undefined
-ind2    blank   Undefined
-a       NR      Code des Produkts
-b       NR      Jahrgang und Heftnummer
-c       R       Klassifikation
-d       NR      Spezifische Benmerkung
-
 995     R       BSG: REKONVERTIERTE AUFNAHMEN
 ind1    blank   Undefined
 ind2    blank   Undefined
@@ -1779,17 +1410,7 @@ ind2    blank   Undefined
 a       NR      Code für die Identifikation
 b       NR      Code für spezifischen Auszug
 
-997     R       AUSWAHLCODES
-ind1    blank   Undefined
-ind2    blank   Undefined
-a       NR      Code des Produkts
-b       NR      Jahrgang und Heftnummer
-c       NR      Klassifikation
-d       NR      Weitere Merkmale
-e       NR      Weitere Merkmale
-3       NR      Spezifizierte Materialien
-
-998     R       AUSWAHLCODE FÜR DAS SCHWEIZER BUCH
+998     R       AUSWAHLCODE FÜR BSG
 ind1    blank   Undefined
 ind2    blank   Undefined
 a       NR      Code des Produkts
