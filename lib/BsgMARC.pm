@@ -301,15 +301,13 @@ sub _check_dollar_w {
 				my ( $code, $data ) = @$subfield;
 				if ( $code eq 'w' )
 				{
-						say "Length \$data: length($data)";
-					unless ( (length($data) == 17) && ($data =~ /CH-BSG/)  )
+					unless ( (length($data) == 17) && ($data =~ /\(CH-BSG\)/)  )
 					{
-						say "Length \$data: length($data)";
 						my $error = "MARC";					
 						my $ind_or_sf = $code;
 						my $tag       = $field->tag();
 						my $content   = $data;
-						my $problem   = "\$w beginnt nicht mit (CH-BSG)";
+						my $problem   = "\$w beginnt nicht mit (CH-BSG) oder hat eine ungültige Länge";
 						my @message = (
 										$error, $bib_id, $tag, $ind_or_sf,
 										$content, $problem
