@@ -1272,6 +1272,7 @@ s       NR      Version
 t       NR      Title of a work 
 u       NR      Affiliation 
 v       NR      Volume/sequential designation  
+w       R       Record control number 
 x       NR      International Standard Serial Number
 0       R       Authority record control number
 3       NR      Materials specified
@@ -1303,6 +1304,7 @@ s       NR      Version
 t       NR      Title of a work 
 u       NR      Affiliation 
 v       NR      Volume/sequential designation 
+w       R       Record control number 
 x       NR      International Standard Serial Number
 0       R       Authority record control number
 3       NR      Materials specified
@@ -1332,6 +1334,7 @@ s       NR      Version
 t       NR      Title of a work 
 u       NR      Affiliation 
 v       NR      Volume/sequential designation 
+w       R       Record control number 
 x       NR      International Standard Serial Number
 0       R       Authority record control number
 3       NR      Materials specified
@@ -1359,6 +1362,7 @@ r       NR      Key for music
 s       NR      Version 
 t       NR      Title of a work 
 v       NR      Volume/sequential designation 
+w       R       Record control number 
 x       NR      International Standard Serial Number
 0       R       Authority record control number
 3       NR      Materials specified
