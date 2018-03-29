@@ -151,38 +151,6 @@ sub _check_ill
 
 	}
 
-	my @field = $record->field('300');
-	if (@field)
-	{
-		foreach my $field (@field)
-		{
-			my @subfields = $field->subfields();
-			foreach my $subfield (@subfields)
-			{
-				my ( $code, $data ) = @$subfield;
-
-				#				say "code: $code ; data: $data";
-				if ( $data =~ m/ill|Ill/ )
-				{
-					#					say "gefunden";
-					unless ( $code eq 'b' )
-					{
-						#						say "unless";
-						my $ind_or_sf = $code;
-						my $tag       = '300';
-						my $content   = $data;
-						my $problem   = "Ill. in falschem Unterfeld";
-						my @message = (
-										$error, $bib_id, $tag, $ind_or_sf,
-										$content, $problem
-						);
-						$warnings->add_warning( \@message );
-
-					}
-				}
-			}
-		}
-	}
 }
 
 sub _check_zeitcode
