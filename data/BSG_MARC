@@ -302,6 +302,7 @@ ind1    blank   Undefined
 ind2    blank   Undefined
 a       NR      Statement of scale 
 b       NR      Statement of projection 
+c       NR      Statement of coordinates 
 d       NR      Statement of zone 
 e       NR      Statement of equinox 
 
