@@ -32,6 +32,7 @@ sub check_local
 	&_check_zeitcode( $record, $warnings, $bib_id );
 	&_check_language_of_record( $record, $warnings, $bib_id );
 	&_check_ill( $record, $warnings, $bib_id );
+	&_check_dollar_w( $record, $warnings, $bib_id );
 
 }
 
@@ -146,8 +147,6 @@ sub _check_ill
 			$warnings->add_warning( \@message );
 
 		}
-		say $bib_lvl;
-		say "'$ill'";
 
 	}
 
@@ -284,6 +283,45 @@ sub _check_language_of_record
 		}
 	}
 
+}
+
+sub _check_dollar_w {
+		my $record   = new MARC::Record;
+	my $warnings = MARCWarnings->new();
+	( $record, $warnings, my $bib_id ) = @_;
+	
+	my @fields = $record->field('760', '762', '765'. '767', '770', '772', '773', '774', '775', '776', '777', '780', '785', '786', '787', '800', '810', '811', '830');
+	if (@fields)
+	{
+		foreach my $field (@fields)
+		{
+			my @subfields = $field->subfields();
+			foreach my $subfield (@subfields)
+			{
+				my ( $code, $data ) = @$subfield;
+				if ( $code eq 'w' )
+				{
+						say "Length \$data: length($data)";
+					unless ( (length($data) == 17) && ($data =~ /CH-BSG/)  )
+					{
+						say "Length \$data: length($data)";
+						my $error = "MARC";					
+						my $ind_or_sf = $code;
+						my $tag       = $field->tag();
+						my $content   = $data;
+						my $problem   = "\$w beginnt nicht mit (CH-BSG)";
+						my @message = (
+										$error, $bib_id, $tag, $ind_or_sf,
+										$content, $problem
+						);
+						$warnings->add_warning( \@message );
+
+					}
+				}
+			}
+
+		}
+	}
 }
 
 __PACKAGE__->meta->make_immutable;
