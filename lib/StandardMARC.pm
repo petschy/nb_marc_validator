@@ -252,7 +252,7 @@ sub check_245 {
 		}
 		my $key      = trim( $lang . "_" . $art );
 		if ( grep ( /^$key$/, @article ) ) {
-			if ( $ind2 == 0 ) {
+			if ( $ind2 eq '0' ) {
 				my $error     = "Artikel";
 				my $ind_or_sf = "I2";
 				my $tag       = $field->tag;
@@ -280,7 +280,7 @@ sub check_245 {
 			}
 		}
 		else {
-			unless ( $ind2 == 0 ) {
+			unless ( $ind2 eq '0' ) {
 				my $error     = "Artikel";
 				my $ind_or_sf = "I2";
 				my $tag       = $field->tag;
@@ -407,7 +407,7 @@ sub check_245 {
 				my $tag       = $field->tag;
 				my $content   = $subfields[$index][1];
 				my $problem =
-"Das Feld vor Unterfeld \$p muss mit einem mit einem Komma ohne Leerschlag enden, wenn es ein Unterfeld \$n ist: \$$subfields[$index-1][0] $subfields[$index-1][1] \$$subfields[$index][0] $subfields[$index][1]";
+"Das Feld vor Unterfeld \$p muss mit einem Komma ohne Leerschlag enden, wenn es ein Unterfeld \$n ist: \$$subfields[$index-1][0] $subfields[$index-1][1] \$$subfields[$index][0] $subfields[$index][1]";
 				my @message =
 				  ( $error, $bib_id, $tag, $ind_or_sf, $content, $problem );
 				$warnings->add_warning( \@message );
@@ -421,7 +421,7 @@ sub check_245 {
 				my $tag       = $field->tag;
 				my $content   = $subfields[$index][1];
 				my $problem =
-"Das Feld vor Unterfeld \$p muss mit einem mit einem einem Punkt ohne Leerschlag oder mit Bindestrich Leerschlag Punkt enden, wenn es kein Unterfeld \$n ist: \$$subfields[$index-1][0] $subfields[$index-1][1] \$$subfields[$index][0] $subfields[$index][1]";
+"Das Feld vor Unterfeld \$p muss mit einem Punkt ohne Leerschlag oder mit Bindestrich Leerschlag Punkt enden, wenn es kein Unterfeld \$n ist: \$$subfields[$index-1][0] $subfields[$index-1][1] \$$subfields[$index][0] $subfields[$index][1]";
 				my @message =
 				  ( $error, $bib_id, $tag, $ind_or_sf, $content, $problem );
 				$warnings->add_warning( \@message );
