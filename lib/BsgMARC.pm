@@ -33,6 +33,7 @@ sub check_local
 	&_check_language_of_record( $record, $warnings, $bib_id );
 	&_check_ill( $record, $warnings, $bib_id );
 	&_check_dollar_w( $record, $warnings, $bib_id );
+	&_check_040( $record, $warnings, $bib_id );
 
 }
 
@@ -94,11 +95,11 @@ sub _check_ill
 
 	my $error = "MARC";
 
-	my $leader = $record->leader();
-	my $bib_lvl = substr $leader, 7, 1;
+	my $leader         = $record->leader();
+	my $bib_lvl        = substr $leader, 7, 1;
 	my $type_of_record = substr $leader, 6, 1;
 
-	if (( $bib_lvl eq 'm' or $bib_lvl eq 'a' ) && $type_of_record eq 'a')
+	if ( ( $bib_lvl eq 'm' or $bib_lvl eq 'a' ) && $type_of_record eq 'a' )
 	{
 		my $ill = $record->field('008')->as_string;
 		$ill = substr $ill, 18, 4;
@@ -285,12 +286,19 @@ sub _check_language_of_record
 
 }
 
-sub _check_dollar_w {
-		my $record   = new MARC::Record;
+sub _check_dollar_w
+{
+	my $record   = new MARC::Record;
 	my $warnings = MARCWarnings->new();
 	( $record, $warnings, my $bib_id ) = @_;
-	
-	my @fields = $record->field('760', '762', '765'. '767', '770', '772', '773', '774', '775', '776', '777', '780', '785', '786', '787', '800', '810', '811', '830');
+
+	my @fields = $record->field(
+								 '760', '762', '765' . '767', '770',
+								 '772', '773', '774',         '775',
+								 '776', '777', '780',         '785',
+								 '786', '787', '800',         '810',
+								 '811', '830'
+	);
 	if (@fields)
 	{
 		foreach my $field (@fields)
@@ -301,13 +309,15 @@ sub _check_dollar_w {
 				my ( $code, $data ) = @$subfield;
 				if ( $code eq 'w' )
 				{
-					unless ( (length($data) == 17) && ($data =~ /\(CH-BSG\)/)  )
+					unless (    ( length($data) == 17 )
+							 && ( $data =~ /\(CH-BSG\)/ ) )
 					{
-						my $error = "MARC";					
+						my $error     = "MARC";
 						my $ind_or_sf = $code;
 						my $tag       = $field->tag();
 						my $content   = $data;
-						my $problem   = "\$w beginnt nicht mit (CH-BSG) oder hat eine ungültige Länge";
+						my $problem =
+"\$w beginnt nicht mit (CH-BSG) oder hat eine ungültige Länge";
 						my @message = (
 										$error, $bib_id, $tag, $ind_or_sf,
 										$content, $problem
@@ -324,3 +334,76 @@ sub _check_dollar_w {
 
 __PACKAGE__->meta->make_immutable;
 1;
+
+sub _check_040
+{
+	my $record   = new MARC::Record;
+	my $warnings = MARCWarnings->new();
+	( $record, $warnings, my $bib_id ) = @_;
+
+	my $error = "MARC";
+	my @f040  = $record->field('040');
+
+	if (@f040)
+	{
+		foreach my $field (@f040)
+		{
+			my @dollarA   = ();
+			my @dollarD   = ();
+			my @subfields = $field->subfields();
+			foreach my $subfield (@subfields)
+			{
+				my ( $code, $data ) = @$subfield;
+				if ( $code eq 'a' )
+				{
+					push @dollarA, $data;
+				} elsif ( $code eq 'd' )
+				{
+					push @dollarD, $data;
+				}
+			}
+
+			if (@dollarA)
+			{
+				if ( $dollarA[0] ne 'CH-BSG' )
+				{
+					my $isChBsg = -1;
+					foreach my $sf (@dollarD)
+					{
+						if ( $sf eq 'CH-BSG' )
+						{
+							$isChBsg = 1;
+						}
+					}
+					if ( $isChBsg != 1 )
+					{
+						my $error     = "MARC";
+						my $ind_or_sf = 'd';
+						my $tag       = '040';
+						my $content   = join( ' ; ', @dollarD );
+						my $problem =
+						  "ein Unterfeld d muss den Wert CH-BSG haben";
+						my @message = (
+										$error, $bib_id, $tag, $ind_or_sf,
+										$content, $problem
+						);
+						$warnings->add_warning( \@message );
+					}
+				}
+			} else
+			{
+				# Unterfeld a muss vorhanden sein
+				my $error     = "MARC";
+				my $ind_or_sf = 'a';
+				my $tag       = '040';
+				my $content   = '-';
+				my $problem   = "Unterfeld a fehlt";
+				my @message =
+				  ( $error, $bib_id, $tag, $ind_or_sf, $content, $problem );
+				$warnings->add_warning( \@message );
+
+			}
+
+		}
+	}
+}
