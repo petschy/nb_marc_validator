@@ -709,6 +709,7 @@ ind2    07      Thesaurus
 a       NR      Genre/form data or focus term 
 v       R       Form subdivision 
 x       R       General subdivision 
+y       R       Chronological subdivision
 z       R       Geographic subdivision 
 0       R       Authority record control number
 2       NR      Source of term 
