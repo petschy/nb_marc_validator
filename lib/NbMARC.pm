@@ -11,8 +11,6 @@ use namespace::autoclean;
 use MARC::Record;
 use MARC::Field;
 
-use lib 'lib';
-use MARCWarnings;
 
 {
 	extends 'StandardMARC';

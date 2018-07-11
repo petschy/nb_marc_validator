@@ -8,7 +8,6 @@ use diagnostics;
 use Moose;
 use namespace::autoclean;
 
-use lib 'lib';
 
 {
 	extends 'StandardMARC';

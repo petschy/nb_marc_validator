@@ -13,17 +13,25 @@ use MARC::Field;
 
 # lib modules
 use lib 'lib';
-
+use BsgMARC;
+use SbMARC;
+use NbMARC;
 use F001;
 use MARCWarnings;
 use MyConfig;
 use StandardMARC;
+use FixedFieldsWarnings;
 
 my $f001     = F001->new();
 my $warnings = MARCWarnings->new();
+my $warnings_fixed_fields = FixedFieldsWarnings->new();
 my @header   = ( 'FEHLER', 'BIB_ID', 'FELD', 'IND/UF/POS', 'FELDINHALT', 'HINWEIS' );
 
 $warnings->add_warning( \@header );
+
+@header   = ('BIB_ID', 'FELD', 'FELDLÄNGE_SOLL', 'FELDLÄNGE_IST', 'FELDLÄNGE_OK', 'ToM', 'POS', 'WERT', 'ERLAUBT' );
+$warnings_fixed_fields->add_warning( \@header );
+
 my $config = MyConfig->new();
 
 # Marc file
@@ -48,8 +56,11 @@ $marcfile = $config->marcdir . $marcfile;
 chomp $marcfile;
 my $warningsfile = $config->warningsdir . "Warnings_" . $rules . ".txt";
 chomp $warningsfile;
+my $warningsfile_fixed_fields = $config->warningsdir . "Warnings_fixed-fields_" . $rules . ".txt";
+chomp $warningsfile_fixed_fields;
 
 my $fh_warnings = IO::File->new( $warningsfile, '>:utf8' );
+my $fh_warnings_fixed_fields = IO::File->new( $warningsfile_fixed_fields, '>:utf8' );
 my $fh_marc     = IO::File->new( $marcfile,     '<:utf8' );
 
 my $file = $config->datadir() . "ARTIKEL";
@@ -178,12 +189,18 @@ while ( my $record = $records->next() ) {
 		}
 
 	}
+	
+	my $type_of_material = $marc_rule->get_type_of_material( $record->leader());
+	$marc_rule->check_leader( $record->leader(), $type_of_material, $warnings_fixed_fields, $f001->bib_id) ;
+
 
 	$marc_rule->check_language( $record, $warnings, $f001->bib_id );
 	$marc_rule->check_245( $record, $warnings, $f001->bib_id, @article );
 	$marc_rule->check_264( $record, $warnings, $f001->bib_id );
+#	$marc_rule->check_leader( $record, $warnings, $f001->bib_id );
+#	$marc_rule->check_006( $record, $warnings, $f001->bib_id );
+#	$marc_rule->check_008( $record, $warnings, $f001->bib_id );
 	$marc_rule->check_local( $record, $warnings, $f001->bib_id );
-
 	$i++;
 }
 
@@ -191,11 +208,15 @@ for my $x ( @{ $warnings->warnings } ) {
 	say $fh_warnings join( "\t", @{$x} );
 }
 
+for my $x ( @{ $warnings_fixed_fields->warnings } ) {
+	say $fh_warnings_fixed_fields join( "\t", @{$x} );
+}
+
 say '____________________________________________';
 say '';
 say "Marc File: $marcfile";
 say "Data Dir: " . $marc_rule->valid_data_file;
-say "Warnings: $warningsfile";
+say "Warnings: $warningsfile, $warningsfile_fixed_fields";
 say '____________________________________________';
 say $i- 1 . " " . $rules . "-Datensätze validiert.";
 

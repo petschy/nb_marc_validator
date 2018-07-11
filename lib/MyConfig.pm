@@ -11,8 +11,6 @@ use namespace::autoclean;
 use String::Util qw(trim);
 use Data::Dumper;
 
-use lib 'lib';
-
 has 'marcdir' => (
 				is      => 'ro',
 				isa     => 'Str',
