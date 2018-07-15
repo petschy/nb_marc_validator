@@ -27,3 +27,4 @@ nytprof.out
 /docs/
 /mrc/
 *_warnings.txt
+/.includepath
