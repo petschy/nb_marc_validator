@@ -192,6 +192,7 @@ while ( my $record = $records->next() ) {
 	
 	my $type_of_material = $marc_rule->get_type_of_material( $record->leader());
 	$marc_rule->check_leader( $record->leader(), $type_of_material, $warnings_fixed_fields, $f001->bib_id) ;
+	$marc_rule->check_008( $record, $type_of_material, $warnings_fixed_fields, $f001->bib_id) ;
 
 
 	$marc_rule->check_language( $record, $warnings, $f001->bib_id );

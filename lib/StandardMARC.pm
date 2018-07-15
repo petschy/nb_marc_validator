@@ -9,6 +9,7 @@ use Moose;
 use namespace::autoclean;
 
 use String::Util qw(trim);
+use String::Unquotemeta;
 use Data::Dumper;
 
 # MARC
@@ -490,7 +491,6 @@ sub check_264
 	}
 }
 
-
 sub check_leader
 {
 	my $self = shift;
@@ -542,8 +542,8 @@ sub check_leader
 		unless ( grep( /$code/, @{ $values[1] } ) )
 		{
 			my @message = (
-							$bib_id, "LDR", length($leader), 24, $length_ok,
-							$type_of_material, $i, $code, join( ", ", @{ $values[1] })
+					 $bib_id, "LDR", length($leader), 24, $length_ok,
+					 $type_of_material, $i, $code, join( ", ", @{ $values[1] } )
 			);
 			$warnings->add_warning( \@message );
 		}
@@ -556,20 +556,473 @@ sub check_leader
 sub check_008
 {
 	my $self = shift;
-	( my $record, my $warnings, my $bib_id ) = @_;
+	( my $record, my $type_of_material, my $warnings, my $bib_id ) = @_;
 
-	my $field = $record->field('008')->as_string;
-	if ( length($field) != 40 )
+	my $config = MyConfig->new();
+	my $fh;
+	my @fieldArray     = $record->field('008');
+	my $tag            = '008';
+	my $default_length = 40;
+	my $code           = '-';
+	my $default_values = '-';
+	my @default_values = ();
+
+	# Gültige Werte 008
+	my @pos38_values = ( ' ', 'd', 'o', 'r', 's', 'x', '|' );
+	my @pos39_values = ( '\ ', 'c', 'd', 'u', '|' );
+
+	# Read values for country codes from file
+	my @country_codes      = ();
+	my $file_country_codes = $config->datadir() . "COUNTRY_CODES";
+	$fh = IO::File->new( $file_country_codes, '<:utf8' );
+	while (<$fh>)
 	{
-		my $error     = "MARC";
-		my $ind_or_sf = '-';
-		my $tag       = '008';
-		my $content   = $field;
-		my $problem   = "Feld 008 hat falsche Länge: " . length($field);
-		my @message = ( $error, $bib_id, $tag, $ind_or_sf, $content, $problem );
-		$warnings->add_warning( \@message );
+		chomp;
+		push @country_codes, $_;
+	}
+	my @country_codes_deprecated = ();
+	my $file_country_codes_deprecated =
+	  $config->datadir() . "COUNTRY_CODES_DEPRECATED";
+	$fh = IO::File->new( $file_country_codes_deprecated, '<:utf8' );
+	while (<$fh>)
+	{
+		chomp;
+		push @country_codes_deprecated, $_;
+	}
+
+	# Read values for language codes from file
+	my @language_codes      = ();
+	my $file_language_codes = $config->datadir() . "LANGUAGE_CODES";
+	$fh = IO::File->new( $file_language_codes, '<:utf8' );
+	while (<$fh>)
+	{
+		chomp;
+		push @language_codes, $_;
+	}
+	my @language_codes_deprecated = ();
+	my $file_language_codes_deprecated =
+	  $config->datadir() . "LANGUAGE_CODES_DEPRECATED";
+	$fh = IO::File->new( $file_language_codes_deprecated, '<:utf8' );
+	while (<$fh>)
+	{
+		chomp;
+		push @language_codes_deprecated, $_;
+	}
+
+	foreach my $field (@fieldArray)
+	{
+		my $pos       = '-';
+		my $length    = length( $field->data() );
+		my $length_ok = "JA";
+		my $pattern   = '';
+
+		# Length of field
+		unless ( $length == $default_length )
+		{
+			$length_ok = 'NEIN';
+			my @message = (
+							$bib_id,         $tag,       $length,
+							$default_length, $length_ok, $type_of_material,
+							$pos,            $code,      $default_values
+			);
+			$warnings->add_warning( \@message );
+			return 1;
+
+		}
+
+		my $pos07to14 = substr( $field->data(), 7,  8 );
+		my $pos35to37 = substr( $field->data(), 35, 3 );
+		my $pos38     = substr( $field->data(), 38, 1 );
+		my $pos39 = quotemeta substr( $field->data(), 39, 1 );
+
+		# 00-05 - Date entered on file
+		$pos            = "00-05";
+		$default_values = "6-stellige Zahl";
+		$code           = quotemeta substr( $field->data(), 0, 6 );
+		$pattern        = '^\d{6}$';
+		unless ( $code =~ $pattern )
+		{
+			$code = unquotemeta($code);
+			my @message = (
+							$bib_id,         $tag,       $length,
+							$default_length, $length_ok, $type_of_material,
+							$pos,            $code,      $default_values
+			);
+			$warnings->add_warning( \@message );
+		}
+
+		# 06 - Type of date/Publication status
+		$pos = "06";
+		$code = quotemeta substr( $field->data(), 6, 1 );
+		@default_values = (
+							'b', 'c', 'd', 'e', 'i', 'k', 'm', 'n',
+							'p', 'q', 'r', 's', 't', 'u', '|'
+		);
+		$default_values = join( ", ", @default_values );
+		unless ( grep( /$code/, @default_values ) )
+		{
+			$code = unquotemeta($code);
+			my @message = (
+							$bib_id,         $tag,       $length,
+							$default_length, $length_ok, $type_of_material,
+							$pos,            $code,      $default_values
+			);
+			$warnings->add_warning( \@message );
+		}
+
+		# 07-10 - Date 1
+		$pos            = "07-10";
+		$default_values = "4 Positionen mit Zahl, Leerschlag oder u; oder ||||";
+		$code           = substr( $field->data(), 7, 4 );
+		$pattern        = '^[\du ]{4}$|^\|{4}$';
+		unless ( $code =~ $pattern )
+		{
+			my @message = (
+							$bib_id,         $tag,       $length,
+							$default_length, $length_ok, $type_of_material,
+							$pos,            $code,      $default_values
+			);
+			$warnings->add_warning( \@message );
+		}
+
+		# 11-14 - Date 2
+		$pos            = "11-14";
+		$default_values = "4 Positionen mit Zahl, Leerschlag oder u; oder ||||";
+		$code           = substr( $field->data(), 11, 4 );
+		$pattern        = '^[\du ]{4}$|^\|{4}$';
+		unless ( $code =~ $pattern )
+		{
+			my @message = (
+							$bib_id,         $tag,       $length,
+							$default_length, $length_ok, $type_of_material,
+							$pos,            $code,      $default_values
+			);
+			$warnings->add_warning( \@message );
+		}
+
+		# 15-17 - Place of publication, production, or execution
+		$pos            = "15-17";
+		$code           = quotemeta substr( $field->data(), 15, 3 );
+		@default_values = @country_codes;
+		$default_values = "Code List for Countries";
+		unless ( grep( /$code/, @default_values ) )
+		{
+			$code = unquotemeta($code);
+			my @message = (
+							$bib_id,         $tag,       $length,
+							$default_length, $length_ok, $type_of_material,
+							$pos,            $code,      $default_values
+			);
+			$warnings->add_warning( \@message );
+		}
+		@default_values = @country_codes_deprecated;
+		$code           = quotemeta substr( $field->data(), 15, 3 );
+		$default_values = "Deprecated Code List for Countries";
+		if ( grep( /$code/, @default_values ) )
+		{
+			$code = unquotemeta($code);
+			my @message = (
+							$bib_id,         $tag,       $length,
+							$default_length, $length_ok, $type_of_material,
+							$pos,            $code,      $default_values
+			);
+			$warnings->add_warning( \@message );
+		}
+
+		# 35-37 - Language
+		$pos            = "35-77";
+		$code           = quotemeta substr( $field->data(), 35, 3 );
+		@default_values = @language_codes;
+		$default_values = "Code List for Languages";
+		unless ( grep( /$code/, @default_values ) )
+		{
+			$code = unquotemeta($code);
+			my @message = (
+							$bib_id,         $tag,       $length,
+							$default_length, $length_ok, $type_of_material,
+							$pos,            $code,      $default_values
+			);
+			$warnings->add_warning( \@message );
+		}
+		@default_values = @language_codes_deprecated;
+		$code           = quotemeta substr( $field->data(), 35, 3 );
+		$default_values = "Deprecated Code List for Languages";
+		if ( grep( /$code/, @default_values ) )
+		{
+			$code = unquotemeta($code);
+			my @message = (
+							$bib_id,         $tag,       $length,
+							$default_length, $length_ok, $type_of_material,
+							$pos,            $code,      $default_values
+			);
+			$warnings->add_warning( \@message );
+		}
+
+		# 38 - Modified record
+		$pos            = "38";
+		$code           = quotemeta substr( $field->data(), 38, 1 );
+		@default_values = ( ' ', 'd', 'o', 'r', 's', 'x', '|' );
+		$default_values = join( ", ", @default_values );
+		unless ( grep( /$code/, @default_values ) )
+		{
+			$code = unquotemeta($code);
+			my @message = (
+							$bib_id,         $tag,       $length,
+							$default_length, $length_ok, $type_of_material,
+							$pos,            $code,      $default_values
+			);
+			$warnings->add_warning( \@message );
+		}
+
+		# 39 - Modified record
+		$pos            = "39";
+		$code           = quotemeta substr( $field->data(), 39, 1 );
+		@default_values = ( ' ', 'c', 'd', 'u', '|' );
+		$default_values = join( ", ", @default_values );
+		unless ( grep( /$code/, @default_values ) )
+		{
+			$code = unquotemeta($code);
+			my @message = (
+							$bib_id,         $tag,       $length,
+							$default_length, $length_ok, $type_of_material,
+							$pos,            $code,      $default_values
+			);
+			$warnings->add_warning( \@message );
+		}
+
+		# Type of material = Book
+		if ( $type_of_material eq "BK" )
+		{
+
+			# 18-21 - Illustrations
+			@default_values = (
+								' ', 'a', 'b', 'c', 'd', 'e', 'f', 'h',
+								'i', 'j', 'k', 'l', 'm', 'o', 'p', '|'
+			);
+			$default_values = join( ", ", @default_values );
+			$pos = 18;
+			while ( $pos < 22 )
+			{
+				$code = quotemeta substr( $field->data(), $pos, 1 );
+				unless ( grep( /$code/, @default_values ) )
+				{
+					$code = unquotemeta($code);
+					my @message = (
+								 $bib_id,         $tag,       $length,
+								 $default_length, $length_ok, $type_of_material,
+								 $pos,            $code,      $default_values
+					);
+					$warnings->add_warning( \@message );
+				}
+				$pos++;
+			}
+
+			# 22 - Target audience
+			$pos = 22;
+			$code = quotemeta substr( $field->data(), 22, 1 );
+			@default_values =
+			  ( ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'j', '|' );
+			$default_values = join( ", ", @default_values );
+			unless ( grep( /$code/, @default_values ) )
+			{
+				$code = unquotemeta($code);
+				my @message = (
+								$bib_id,         $tag,       $length,
+								$default_length, $length_ok, $type_of_material,
+								$pos,            $code,      $default_values
+				);
+				$warnings->add_warning( \@message );
+			}
+
+			# 23 - Form of item
+			$pos = 23;
+			$code = quotemeta substr( $field->data(), 23, 1 );
+			@default_values =
+			  ( ' ', 'a', 'b', 'c', 'd', 'f', 'o', 'q', 'r', 's', '|' );
+			$default_values = join( ", ", @default_values );
+			unless ( grep( /$code/, @default_values ) )
+			{
+				$code = unquotemeta($code);
+				my @message = (
+								$bib_id,         $tag,       $length,
+								$default_length, $length_ok, $type_of_material,
+								$pos,            $code,      $default_values
+				);
+				$warnings->add_warning( \@message );
+			}
+
+			# 24-27 - Nature of contents
+			@default_values = (
+							   ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'i', 'j',
+							   'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+							   'u', 'v', 'w', 'y', 'z', '2', '5', '6', '|'
+			);
+			$default_values = join( ", ", @default_values );
+			$pos = 24;
+			while ( $pos < 28 )
+			{
+				$code = quotemeta substr( $field->data(), $pos, 1 );
+				unless ( grep( /$code/, @default_values ) )
+				{
+					$code = unquotemeta($code);
+					my @message = (
+								 $bib_id,         $tag,       $length,
+								 $default_length, $length_ok, $type_of_material,
+								 $pos,            $code,      $default_values
+					);
+					$warnings->add_warning( \@message );
+				}
+				$pos++;
+			}
+
+			# 28 - Government publication
+			$pos = 28;
+			$code = quotemeta substr( $field->data(), 28, 1 );
+			@default_values =
+			  ( ' ', 'a', 'c', 'f', 'i', 'l', 'm', 'o', 's', 'u', 'z', '|' );
+			$default_values = join( ", ", @default_values );
+			unless ( grep( /$code/, @default_values ) )
+			{
+				$code = unquotemeta($code);
+				my @message = (
+								$bib_id,         $tag,       $length,
+								$default_length, $length_ok, $type_of_material,
+								$pos,            $code,      $default_values
+				);
+				$warnings->add_warning( \@message );
+			}
+
+			# 29 - Conference publication
+			$pos            = 29;
+			$code           = quotemeta substr( $field->data(), 29, 1 );
+			@default_values = ( '0', '1', '|' );
+			$default_values = join( ", ", @default_values );
+			unless ( grep( /$code/, @default_values ) )
+			{
+				$code = unquotemeta($code);
+				my @message = (
+								$bib_id,         $tag,       $length,
+								$default_length, $length_ok, $type_of_material,
+								$pos,            $code,      $default_values
+				);
+				$warnings->add_warning( \@message );
+			}
+
+			# 30 - Festschrift
+			$pos            = 30;
+			$code           = quotemeta substr( $field->data(), 30, 1 );
+			@default_values = ( '0', '1', '|' );
+			$default_values = join( ", ", @default_values );
+			unless ( grep( /$code/, @default_values ) )
+			{
+				$code = unquotemeta($code);
+				my @message = (
+								$bib_id,         $tag,       $length,
+								$default_length, $length_ok, $type_of_material,
+								$pos,            $code,      $default_values
+				);
+				$warnings->add_warning( \@message );
+			}
+
+			# 31 Index
+			$pos            = 31;
+			$code           = quotemeta substr( $field->data(), 31, 1 );
+			@default_values = ( '0', '1', '|' );
+			$default_values = join( ", ", @default_values );
+			unless ( grep( /$code/, @default_values ) )
+			{
+				$code = unquotemeta($code);
+				my @message = (
+								$bib_id,         $tag,       $length,
+								$default_length, $length_ok, $type_of_material,
+								$pos,            $code,      $default_values
+				);
+				$warnings->add_warning( \@message );
+			}
+
+			# 32 Undefined
+			$pos            = 32;
+			$code           = quotemeta substr( $field->data(), 32, 1 );
+			@default_values = ( ' ', '|' );
+			$default_values = join( ", ", @default_values );
+			unless ( grep( /$code/, @default_values ) )
+			{
+				$code = unquotemeta($code);
+				my @message = (
+								$bib_id,         $tag,       $length,
+								$default_length, $length_ok, $type_of_material,
+								$pos,            $code,      $default_values
+				);
+				$warnings->add_warning( \@message );
+			}
+
+			# 33 - Literary form
+			$pos = 33;
+			$code = quotemeta substr( $field->data(), 33, 1 );
+			@default_values = (
+								'0', '1', 'd', 'e', 'f', 'h', 'i', 'j',
+								'm', 'p', 's', 'u', '|'
+			);
+			$default_values = join( ", ", @default_values );
+			unless ( grep( /$code/, @default_values ) )
+			{
+				$code = unquotemeta($code);
+				my @message = (
+								$bib_id,         $tag,       $length,
+								$default_length, $length_ok, $type_of_material,
+								$pos,            $code,      $default_values
+				);
+				$warnings->add_warning( \@message );
+			}
+
+			# 34 - Biography 
+			$pos = 34;
+			$code = quotemeta substr( $field->data(), 34, 1 );
+			@default_values = (
+								' ', 'a', 'b', 'c', 'd', '|'
+			);
+			$default_values = join( ", ", @default_values );
+			unless ( grep( /$code/, @default_values ) )
+			{
+				$code = unquotemeta($code);
+				my @message = (
+								$bib_id,         $tag,       $length,
+								$default_length, $length_ok, $type_of_material,
+								$pos,            $code,      $default_values
+				);
+				$warnings->add_warning( \@message );
+			}
+
+		} elsif ( $type_of_material eq "CR" )
+		{
+
+		} elsif ( $type_of_material eq "CF" )
+		{
+
+		} elsif ( $type_of_material eq "MP" )
+		{
+
+		} elsif ( $type_of_material eq "MU" )
+		{
+
+		} elsif ( $type_of_material eq "VM" )
+		{
+
+		} elsif ( $type_of_material eq "MX" )
+		{
+
+		} elsif ( $type_of_material eq "INVALID" )
+		{
+			my @message = (
+					 $bib_id, "008", $length, 40, $length_ok, $type_of_material,
+					 '-', '-', '-'
+			);
+			$warnings->add_warning( \@message );
+
+		}
 
 	}
+
 }
 
 sub check_006
