@@ -29,7 +29,7 @@ my @header   = ( 'FEHLER', 'BIB_ID', 'FELD', 'IND/UF/POS', 'FELDINHALT', 'HINWEI
 
 $warnings->add_warning( \@header );
 
-@header   = ('BIB_ID', 'FELD', 'FELDLÄNGE_SOLL', 'FELDLÄNGE_IST', 'FELDLÄNGE_OK', 'ToM', 'POS', 'WERT', 'ERLAUBT' );
+@header   = ('BIB_ID', 'FELD', 'POS', 'WERT', 'ERLAUBT', 'FELDLÄNGE_SOLL', 'FELDLÄNGE_IST', 'FELDLÄNGE_OK', 'TYPE_OF_MATERIAL' );
 $warnings_fixed_fields->add_warning( \@header );
 
 my $config = MyConfig->new();

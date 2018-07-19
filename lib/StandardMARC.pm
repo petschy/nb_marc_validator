@@ -534,16 +534,31 @@ sub check_leader
 	}
 
 	my $i = 0;
+	my $pos;
+	my $tag = "LDR";
 
 	while ( $i < length($leader) )
 	{
-		my $code = substr( $leader, $i, 1 );
-		my @values = %valid{$i};
+		my $code           = substr( $leader, $i, 1 );
+		my @values         = %valid{$i};
+		my $default_values = join( ", ", @{ $values[1] } );
+		$default_values =~ s/ ,/#,/;
 		unless ( grep( /$code/, @{ $values[1] } ) )
 		{
+			if ( $i < 10 )
+			{
+				$pos = "0$i";
+			} else
+			{
+				$pos = $i;
+			}
+			$code =~ s/ /#/;
 			my @message = (
-					 $bib_id, "LDR", length($leader), 24, $length_ok,
-					 $type_of_material, $i, $code, join( ", ", @{ $values[1] } )
+							$bib_id,         $tag,
+							$pos,            $code,
+							$default_values, length($leader),
+							24,              $length_ok,
+							$type_of_material
 			);
 			$warnings->add_warning( \@message );
 		}
@@ -566,10 +581,6 @@ sub check_008
 	my $code           = '-';
 	my $default_values = '-';
 	my @default_values = ();
-
-	# Gültige Werte 008
-	my @pos38_values = ( ' ', 'd', 'o', 'r', 's', 'x', '|' );
-	my @pos39_values = ( '\ ', 'c', 'd', 'u', '|' );
 
 	# Read values for country codes from file
 	my @country_codes      = ();
@@ -621,19 +632,14 @@ sub check_008
 		{
 			$length_ok = 'NEIN';
 			my @message = (
-							$bib_id,         $tag,       $length,
-							$default_length, $length_ok, $type_of_material,
-							$pos,            $code,      $default_values
+							$bib_id,         $tag,            $pos,
+							$code,           $default_values, $length,
+							$default_length, $length_ok,      $type_of_material
 			);
 			$warnings->add_warning( \@message );
 			return 1;
 
 		}
-
-		my $pos07to14 = substr( $field->data(), 7,  8 );
-		my $pos35to37 = substr( $field->data(), 35, 3 );
-		my $pos38     = substr( $field->data(), 38, 1 );
-		my $pos39 = quotemeta substr( $field->data(), 39, 1 );
 
 		# 00-05 - Date entered on file
 		$pos            = "00-05";
@@ -643,10 +649,11 @@ sub check_008
 		unless ( $code =~ $pattern )
 		{
 			$code = unquotemeta($code);
+			$code =~ s/ /#/;
 			my @message = (
-							$bib_id,         $tag,       $length,
-							$default_length, $length_ok, $type_of_material,
-							$pos,            $code,      $default_values
+							$bib_id,         $tag,            $pos,
+							$code,           $default_values, $length,
+							$default_length, $length_ok,      $type_of_material
 			);
 			$warnings->add_warning( \@message );
 		}
@@ -662,10 +669,11 @@ sub check_008
 		unless ( grep( /$code/, @default_values ) )
 		{
 			$code = unquotemeta($code);
+			$code =~ s/ /#/;
 			my @message = (
-							$bib_id,         $tag,       $length,
-							$default_length, $length_ok, $type_of_material,
-							$pos,            $code,      $default_values
+							$bib_id,         $tag,            $pos,
+							$code,           $default_values, $length,
+							$default_length, $length_ok,      $type_of_material
 			);
 			$warnings->add_warning( \@message );
 		}
@@ -677,10 +685,11 @@ sub check_008
 		$pattern        = '^[\du ]{4}$|^\|{4}$';
 		unless ( $code =~ $pattern )
 		{
+			$code =~ s/ /#/;
 			my @message = (
-							$bib_id,         $tag,       $length,
-							$default_length, $length_ok, $type_of_material,
-							$pos,            $code,      $default_values
+							$bib_id,         $tag,            $pos,
+							$code,           $default_values, $length,
+							$default_length, $length_ok,      $type_of_material
 			);
 			$warnings->add_warning( \@message );
 		}
@@ -692,10 +701,11 @@ sub check_008
 		$pattern        = '^[\du ]{4}$|^\|{4}$';
 		unless ( $code =~ $pattern )
 		{
+			$code =~ s/ /#/;
 			my @message = (
-							$bib_id,         $tag,       $length,
-							$default_length, $length_ok, $type_of_material,
-							$pos,            $code,      $default_values
+							$bib_id,         $tag,            $pos,
+							$code,           $default_values, $length,
+							$default_length, $length_ok,      $type_of_material
 			);
 			$warnings->add_warning( \@message );
 		}
@@ -708,10 +718,11 @@ sub check_008
 		unless ( grep( /$code/, @default_values ) )
 		{
 			$code = unquotemeta($code);
+			$code =~ s/ /#/;
 			my @message = (
-							$bib_id,         $tag,       $length,
-							$default_length, $length_ok, $type_of_material,
-							$pos,            $code,      $default_values
+							$bib_id,         $tag,            $pos,
+							$code,           $default_values, $length,
+							$default_length, $length_ok,      $type_of_material
 			);
 			$warnings->add_warning( \@message );
 		}
@@ -721,10 +732,11 @@ sub check_008
 		if ( grep( /$code/, @default_values ) )
 		{
 			$code = unquotemeta($code);
+			$code =~ s/ /#/;
 			my @message = (
-							$bib_id,         $tag,       $length,
-							$default_length, $length_ok, $type_of_material,
-							$pos,            $code,      $default_values
+							$bib_id,         $tag,            $pos,
+							$code,           $default_values, $length,
+							$default_length, $length_ok,      $type_of_material
 			);
 			$warnings->add_warning( \@message );
 		}
@@ -737,10 +749,11 @@ sub check_008
 		unless ( grep( /$code/, @default_values ) )
 		{
 			$code = unquotemeta($code);
+			$code =~ s/ /#/;
 			my @message = (
-							$bib_id,         $tag,       $length,
-							$default_length, $length_ok, $type_of_material,
-							$pos,            $code,      $default_values
+							$bib_id,         $tag,            $pos,
+							$code,           $default_values, $length,
+							$default_length, $length_ok,      $type_of_material
 			);
 			$warnings->add_warning( \@message );
 		}
@@ -750,10 +763,11 @@ sub check_008
 		if ( grep( /$code/, @default_values ) )
 		{
 			$code = unquotemeta($code);
+			$code =~ s/ /#/;
 			my @message = (
-							$bib_id,         $tag,       $length,
-							$default_length, $length_ok, $type_of_material,
-							$pos,            $code,      $default_values
+							$bib_id,         $tag,            $pos,
+							$code,           $default_values, $length,
+							$default_length, $length_ok,      $type_of_material
 			);
 			$warnings->add_warning( \@message );
 		}
@@ -763,13 +777,16 @@ sub check_008
 		$code           = quotemeta substr( $field->data(), 38, 1 );
 		@default_values = ( ' ', 'd', 'o', 'r', 's', 'x', '|' );
 		$default_values = join( ", ", @default_values );
+		$default_values =~ s/ ,/#,/;
+
 		unless ( grep( /$code/, @default_values ) )
 		{
 			$code = unquotemeta($code);
+			$code =~ s/ /#/;
 			my @message = (
-							$bib_id,         $tag,       $length,
-							$default_length, $length_ok, $type_of_material,
-							$pos,            $code,      $default_values
+							$bib_id,         $tag,            $pos,
+							$code,           $default_values, $length,
+							$default_length, $length_ok,      $type_of_material
 			);
 			$warnings->add_warning( \@message );
 		}
@@ -779,13 +796,15 @@ sub check_008
 		$code           = quotemeta substr( $field->data(), 39, 1 );
 		@default_values = ( ' ', 'c', 'd', 'u', '|' );
 		$default_values = join( ", ", @default_values );
+		$default_values =~ s/ ,/#,/;
 		unless ( grep( /$code/, @default_values ) )
 		{
 			$code = unquotemeta($code);
+			$code =~ s/ /#/;
 			my @message = (
-							$bib_id,         $tag,       $length,
-							$default_length, $length_ok, $type_of_material,
-							$pos,            $code,      $default_values
+							$bib_id,         $tag,            $pos,
+							$code,           $default_values, $length,
+							$default_length, $length_ok,      $type_of_material
 			);
 			$warnings->add_warning( \@message );
 		}
@@ -800,6 +819,7 @@ sub check_008
 								'i', 'j', 'k', 'l', 'm', 'o', 'p', '|'
 			);
 			$default_values = join( ", ", @default_values );
+			$default_values =~ s/ ,/#,/;
 			$pos = 18;
 			while ( $pos < 22 )
 			{
@@ -807,10 +827,11 @@ sub check_008
 				unless ( grep( /$code/, @default_values ) )
 				{
 					$code = unquotemeta($code);
+					$code =~ s/ /#/;
 					my @message = (
-								 $bib_id,         $tag,       $length,
-								 $default_length, $length_ok, $type_of_material,
-								 $pos,            $code,      $default_values
+								  $bib_id, $tag,            $pos,
+								  $code,   $default_values, $length,
+								  $default_length, $length_ok, $type_of_material
 					);
 					$warnings->add_warning( \@message );
 				}
@@ -823,13 +844,15 @@ sub check_008
 			@default_values =
 			  ( ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'j', '|' );
 			$default_values = join( ", ", @default_values );
+			$default_values =~ s/ ,/#,/;
 			unless ( grep( /$code/, @default_values ) )
 			{
 				$code = unquotemeta($code);
+				$code =~ s/ /#/;
 				my @message = (
-								$bib_id,         $tag,       $length,
-								$default_length, $length_ok, $type_of_material,
-								$pos,            $code,      $default_values
+								$bib_id, $tag,            $pos,
+								$code,   $default_values, $length,
+								$default_length, $length_ok, $type_of_material
 				);
 				$warnings->add_warning( \@message );
 			}
@@ -840,13 +863,15 @@ sub check_008
 			@default_values =
 			  ( ' ', 'a', 'b', 'c', 'd', 'f', 'o', 'q', 'r', 's', '|' );
 			$default_values = join( ", ", @default_values );
+			$default_values =~ s/ ,/#,/;
 			unless ( grep( /$code/, @default_values ) )
 			{
 				$code = unquotemeta($code);
+				$code =~ s/ /#/;
 				my @message = (
-								$bib_id,         $tag,       $length,
-								$default_length, $length_ok, $type_of_material,
-								$pos,            $code,      $default_values
+								$bib_id, $tag,            $pos,
+								$code,   $default_values, $length,
+								$default_length, $length_ok, $type_of_material
 				);
 				$warnings->add_warning( \@message );
 			}
@@ -858,6 +883,7 @@ sub check_008
 							   'u', 'v', 'w', 'y', 'z', '2', '5', '6', '|'
 			);
 			$default_values = join( ", ", @default_values );
+			$default_values =~ s/ ,/#,/;
 			$pos = 24;
 			while ( $pos < 28 )
 			{
@@ -865,10 +891,11 @@ sub check_008
 				unless ( grep( /$code/, @default_values ) )
 				{
 					$code = unquotemeta($code);
+					$code =~ s/ /#/;
 					my @message = (
-								 $bib_id,         $tag,       $length,
-								 $default_length, $length_ok, $type_of_material,
-								 $pos,            $code,      $default_values
+								  $bib_id, $tag,            $pos,
+								  $code,   $default_values, $length,
+								  $default_length, $length_ok, $type_of_material
 					);
 					$warnings->add_warning( \@message );
 				}
@@ -881,13 +908,15 @@ sub check_008
 			@default_values =
 			  ( ' ', 'a', 'c', 'f', 'i', 'l', 'm', 'o', 's', 'u', 'z', '|' );
 			$default_values = join( ", ", @default_values );
+			$default_values =~ s/ ,/#,/;
 			unless ( grep( /$code/, @default_values ) )
 			{
 				$code = unquotemeta($code);
+				$code =~ s/ /#/;
 				my @message = (
-								$bib_id,         $tag,       $length,
-								$default_length, $length_ok, $type_of_material,
-								$pos,            $code,      $default_values
+								$bib_id, $tag,            $pos,
+								$code,   $default_values, $length,
+								$default_length, $length_ok, $type_of_material
 				);
 				$warnings->add_warning( \@message );
 			}
@@ -900,10 +929,11 @@ sub check_008
 			unless ( grep( /$code/, @default_values ) )
 			{
 				$code = unquotemeta($code);
+				$code =~ s/ /#/;
 				my @message = (
-								$bib_id,         $tag,       $length,
-								$default_length, $length_ok, $type_of_material,
-								$pos,            $code,      $default_values
+								$bib_id, $tag,            $pos,
+								$code,   $default_values, $length,
+								$default_length, $length_ok, $type_of_material
 				);
 				$warnings->add_warning( \@message );
 			}
@@ -916,10 +946,11 @@ sub check_008
 			unless ( grep( /$code/, @default_values ) )
 			{
 				$code = unquotemeta($code);
+				$code =~ s/ /#/;
 				my @message = (
-								$bib_id,         $tag,       $length,
-								$default_length, $length_ok, $type_of_material,
-								$pos,            $code,      $default_values
+								$bib_id, $tag,            $pos,
+								$code,   $default_values, $length,
+								$default_length, $length_ok, $type_of_material
 				);
 				$warnings->add_warning( \@message );
 			}
@@ -932,10 +963,11 @@ sub check_008
 			unless ( grep( /$code/, @default_values ) )
 			{
 				$code = unquotemeta($code);
+				$code =~ s/ /#/;
 				my @message = (
-								$bib_id,         $tag,       $length,
-								$default_length, $length_ok, $type_of_material,
-								$pos,            $code,      $default_values
+								$bib_id, $tag,            $pos,
+								$code,   $default_values, $length,
+								$default_length, $length_ok, $type_of_material
 				);
 				$warnings->add_warning( \@message );
 			}
@@ -945,13 +977,15 @@ sub check_008
 			$code           = quotemeta substr( $field->data(), 32, 1 );
 			@default_values = ( ' ', '|' );
 			$default_values = join( ", ", @default_values );
+			$default_values =~ s/ ,/#,/;
 			unless ( grep( /$code/, @default_values ) )
 			{
 				$code = unquotemeta($code);
+				$code =~ s/ /#/;
 				my @message = (
-								$bib_id,         $tag,       $length,
-								$default_length, $length_ok, $type_of_material,
-								$pos,            $code,      $default_values
+								$bib_id, $tag,            $pos,
+								$code,   $default_values, $length,
+								$default_length, $length_ok, $type_of_material
 				);
 				$warnings->add_warning( \@message );
 			}
@@ -967,37 +1001,188 @@ sub check_008
 			unless ( grep( /$code/, @default_values ) )
 			{
 				$code = unquotemeta($code);
+				$code =~ s/ /#/;
 				my @message = (
-								$bib_id,         $tag,       $length,
-								$default_length, $length_ok, $type_of_material,
-								$pos,            $code,      $default_values
+								$bib_id, $tag,            $pos,
+								$code,   $default_values, $length,
+								$default_length, $length_ok, $type_of_material
 				);
 				$warnings->add_warning( \@message );
 			}
 
-			# 34 - Biography 
-			$pos = 34;
-			$code = quotemeta substr( $field->data(), 34, 1 );
-			@default_values = (
-								' ', 'a', 'b', 'c', 'd', '|'
-			);
+			# 34 - Biography
+			$pos            = 34;
+			$code           = quotemeta substr( $field->data(), 34, 1 );
+			@default_values = ( ' ', 'a', 'b', 'c', 'd', '|' );
 			$default_values = join( ", ", @default_values );
+			$default_values =~ s/ ,/#,/;
 			unless ( grep( /$code/, @default_values ) )
 			{
 				$code = unquotemeta($code);
+				$code =~ s/ /#/;
 				my @message = (
-								$bib_id,         $tag,       $length,
-								$default_length, $length_ok, $type_of_material,
-								$pos,            $code,      $default_values
+								$bib_id, $tag,            $pos,
+								$code,   $default_values, $length,
+								$default_length, $length_ok, $type_of_material
 				);
 				$warnings->add_warning( \@message );
 			}
 
+			# Type of material = Continuing Ressource
 		} elsif ( $type_of_material eq "CR" )
 		{
 
+			# Type of material = Computer File
 		} elsif ( $type_of_material eq "CF" )
 		{
+			# 18-21 - Undefined
+			$pos            = "18-21";
+			$code           = quotemeta substr( $field->data(), 18, 4 );
+			@default_values = ( '    ', '||||' );
+			$default_values = join( ", ", @default_values );
+			$default_values =~ s/    ,/####,/;
+			unless ( grep( /$code/, @default_values ) )
+			{
+				$code = unquotemeta($code);
+				$code =~ s/ /#/g;
+				my @message = (
+								$bib_id, $tag,            $pos,
+								$code,   $default_values, $length,
+								$default_length, $length_ok, $type_of_material
+				);
+				$warnings->add_warning( \@message );
+			}
+
+			# 22 - Target audience
+			$pos = "22";
+			$code = quotemeta substr( $field->data(), 22, 1 );
+			@default_values =
+			  ( ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'j', '|' );
+			$default_values = join( ", ", @default_values );
+			$default_values =~ s/ ,/#,/;
+			unless ( grep( /$code/, @default_values ) )
+			{
+				$code = unquotemeta($code);
+				$code =~ s/ /#/g;
+				my @message = (
+								$bib_id, $tag,            $pos,
+								$code,   $default_values, $length,
+								$default_length, $length_ok, $type_of_material
+				);
+				$warnings->add_warning( \@message );
+			}
+
+			# 23 - Form of item
+			$pos            = "23";
+			$code           = quotemeta substr( $field->data(), 23, 1 );
+			@default_values = ( ' ', 'o', 'q', '|' );
+			$default_values = join( ", ", @default_values );
+			$default_values =~ s/ ,/#,/;
+			unless ( grep( /$code/, @default_values ) )
+			{
+				$code = unquotemeta($code);
+				$code =~ s/ /#/g;
+				my @message = (
+								$bib_id, $tag,            $pos,
+								$code,   $default_values, $length,
+								$default_length, $length_ok, $type_of_material
+				);
+				$warnings->add_warning( \@message );
+			}
+
+			# 24-25 - Undefined
+			$pos            = "24-25";
+			$code           = quotemeta substr( $field->data(), 24, 2 );
+			@default_values = ( '  ', '||' );
+			$default_values = join( ", ", @default_values );
+			$default_values =~ s/  ,/##,/;
+			unless ( grep( /$code/, @default_values ) )
+			{
+				$code = unquotemeta($code);
+				$code =~ s/ /#/g;
+				my @message = (
+								$bib_id, $tag,            $pos,
+								$code,   $default_values, $length,
+								$default_length, $length_ok, $type_of_material
+				);
+				$warnings->add_warning( \@message );
+			}
+
+			# 26 - Type of computer file
+			$pos = "26";
+			$code = quotemeta substr( $field->data(), 26, 1 );
+			@default_values = (
+								'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
+								'i', 'j', 'm', 'u', 'z', '|'
+			);
+			$default_values = join( ", ", @default_values );
+			$default_values =~ s/ ,/#,/;
+			unless ( grep( /$code/, @default_values ) )
+			{
+				$code = unquotemeta($code);
+				$code =~ s/ /#/g;
+				my @message = (
+								$bib_id, $tag,            $pos,
+								$code,   $default_values, $length,
+								$default_length, $length_ok, $type_of_material
+				);
+				$warnings->add_warning( \@message );
+			}
+
+			# 27 - Undefined
+			$pos            = "27";
+			$code           = quotemeta substr( $field->data(), 27, 1 );
+			@default_values = ( ' ', '|' );
+			$default_values = join( ", ", @default_values );
+			$default_values =~ s/ ,/#,/;
+			unless ( grep( /$code/, @default_values ) )
+			{
+				$code = unquotemeta($code);
+				$code =~ s/ /#/g;
+				my @message = (
+								$bib_id, $tag,            $pos,
+								$code,   $default_values, $length,
+								$default_length, $length_ok, $type_of_material
+				);
+				$warnings->add_warning( \@message );
+			}
+
+			# 28 - Government publication
+			$pos = "28";
+			$code = quotemeta substr( $field->data(), 28, 1 );
+			@default_values =
+			  ( ' ', 'a', 'c', 'f', 'i', 'l', 'm', 'o', 's', 'u', 'z', '|' );
+			$default_values = join( ", ", @default_values );
+			$default_values =~ s/ ,/#,/;
+			unless ( grep( /$code/, @default_values ) )
+			{
+				$code = unquotemeta($code);
+				$code =~ s/ /#/g;
+				my @message = (
+								$bib_id, $tag,            $pos,
+								$code,   $default_values, $length,
+								$default_length, $length_ok, $type_of_material
+				);
+				$warnings->add_warning( \@message );
+			}
+
+			# 29-34 - Undefined
+			$pos            = "29-34";
+			$code           = quotemeta substr( $field->data(), 29, 6 );
+			@default_values = ( '      ', '||||||' );
+			$default_values = join( ", ", @default_values );
+			$default_values =~ s/      ,/######,/;
+			unless ( grep( /$code/, @default_values ) )
+			{
+				$code = unquotemeta($code);
+				$code =~ s/ /#/g;
+				my @message = (
+								$bib_id, $tag,            $pos,
+								$code,   $default_values, $length,
+								$default_length, $length_ok, $type_of_material
+				);
+				$warnings->add_warning( \@message );
+			}
 
 		} elsif ( $type_of_material eq "MP" )
 		{
