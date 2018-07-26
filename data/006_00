@@ -1,0 +1,15 @@
+00006_BOOKS	00	Form of material 	a	Language material
+00006_MUSIC	00	Form of material 	c	Notated music
+00006_MUSIC	00	Form of material 	d	Manuscript notated music
+00006_MAPS	00	Form of material 	e	Cartographic material
+00006_MAPS	00	Form of material 	f	Manuscript cartographic material
+00006_VISUAL_MATERIALS	00	Form of material 	g	Projected medium
+00006_MUSIC	00	Form of material 	i	Nonmusical sound recording
+00006_MUSIC	00	Form of material 	j	Musical sound recording
+00006_VISUAL_MATERIALS	00	Form of material 	k	Two-dimensional nonprojectable graphic
+00006_COMPUTER_FILES	00	Form of material 	m	Computer file/Electronic resource
+00006_VISUAL_MATERIALS	00	Form of material 	o	Kit
+00006_MIXED_MATERIALS	00	Form of material 	p	Mixed material
+00006_VISUAL_MATERIALS	00	Form of material 	r	Three-dimensional artifact or naturally occurring object
+00006_CONTINUING_RESOURCES	00	Form of material 	s	Serial/Integrating resource
+00006_BOOKS	00	Form of material 	t	Manuscript language material
