@@ -1,0 +1,149 @@
+006_BOOKS	06	Form of item	g	Punched paper tape [OBSOLETE]
+006_BOOKS	06	Form of item	h	Magnetic tape [OBSOLETE]
+006_BOOKS	06	Form of item	i	Multimedia [OBSOLETE]
+006_BOOKS	06	Form of item	z	Other form of reproduction [OBSOLETE]
+006_BOOKS	07-10	Nature of contents	h	Handbooks [OBSOLETE]
+006_BOOKS	07-10	Nature of contents	x	Technical reports [OBSOLETE]
+006_BOOKS	11	Government publication	n	Government publication--level undetermined [OBSOLETE]
+006_BOOKS	16	Literary form	c	Comic strips [OBSOLETE]
+006_COMPUTER_FILES	10	Type of machine [OBSOLETE]	a	Computer readable
+006_COMPUTER_FILES	10	Type of machine [OBSOLETE]	z	Other
+006_MAPS	01-04	Relief	h	Color [OBSOLETE]
+006_MAPS	07	Prime meridian [OBSOLETE]	#	Prime meridian not specified
+006_MAPS	07	Prime meridian [OBSOLETE]	e	Greenwich
+006_MAPS	07	Prime meridian [OBSOLETE]	f	Ferro
+006_MAPS	07	Prime meridian [OBSOLETE]	g	Paris
+006_MAPS	07	Prime meridian [OBSOLETE]	h	Other [OBSOLETE]
+006_MAPS	07	Prime meridian [OBSOLETE]	p	Philadelphia
+006_MAPS	07	Prime meridian [OBSOLETE]	w	Washington, D.C.
+006_MAPS	07	Prime meridian [OBSOLETE]	z	Other
+006_MAPS	16-17	Special format characteristics	a	Photocopy, blue line print [OBSOLETE]
+006_MAPS	16-17	Special format characteristics	b	Photocopy [OBSOLETE]
+006_MAPS	16-17	Special format characteristics	c	Negative photocopy [OBSOLETE]
+006_MAPS	16-17	Special format characteristics	d	Film negative [OBSOLETE]
+006_MAPS	16-17	Special format characteristics	f	Facsimile [OBSOLETE]
+006_MAPS	16-17	Special format characteristics	g	Relief model [OBSOLETE]
+006_MAPS	16-17	Special format characteristics	h	Rare [OBSOLETE]
+006_MAPS	16-17	Special format characteristics	m	Braille [OBSOLETE]
+006_MAPS	16-17	Special format characteristics	q	Large print [OBSOLETE]
+006_MUSIC	04	Existence of parts [OBSOLETE]	#	No parts exist
+006_MUSIC	04	Existence of parts [OBSOLETE]	a	Parts exist
+006_MUSIC	04	Existence of parts [OBSOLETE]	n	Not applicable
+006_MUSIC	04	Existence of parts [OBSOLETE]	u	Unknown
+006_MUSIC	06	Form of item	h	Magnetic tape [OBSOLETE]
+006_MUSIC	06	Form of item	i	Multimedia [OBSOLETE]
+006_MUSIC	06	Form of item	x	Other form of reproduction [OBSOLETE]
+006_MUSIC	06	Form of item	z	Other form of reproduction [OBSOLETE]
+006_MUSIC	07-12	Accompanying matter	j	Historical information other than music [OBSOLETE]
+006_MUSIC	07-12	Accompanying matter	n	Not applicable [OBSOLETE]
+006_MUSIC	15	Main entry in body of entry [OBSOLETE]	0	Main entry not in body of entry
+006_MUSIC	15	Main entry in body of entry [OBSOLETE]	1	Main entry in body of entry
+006_MUSIC	15	Main entry in body of entry [OBSOLETE]	|	No attempt to code
+006_CONTINUING_RESOURCES	03	ISSN center [OBSOLETE]	#	No ISSN center code assigned
+006_CONTINUING_RESOURCES	03	ISSN center [OBSOLETE]	0	International Center
+006_CONTINUING_RESOURCES	03	ISSN center [OBSOLETE]	1	United States
+006_CONTINUING_RESOURCES	03	ISSN center [OBSOLETE]	2	United Kingdom
+006_CONTINUING_RESOURCES	03	ISSN center [OBSOLETE]	3	Australia [OBSOLETE]
+006_CONTINUING_RESOURCES	03	ISSN center [OBSOLETE]	4	Canada
+006_CONTINUING_RESOURCES	03	ISSN center [OBSOLETE]	5	Moscow Regional Centre [OBSOLETE]
+006_CONTINUING_RESOURCES	03	ISSN center [OBSOLETE]	6	Federal Republic of Germany [OBSOLETE]
+006_CONTINUING_RESOURCES	03	ISSN center [OBSOLETE]	7	France [OBSOLETE]
+006_CONTINUING_RESOURCES	03	ISSN center [OBSOLETE]	8	Argentina [OBSOLETE]
+006_CONTINUING_RESOURCES	03	ISSN center [OBSOLETE]	9	Japan [OBSOLETE]
+006_CONTINUING_RESOURCES	03	ISSN center [OBSOLETE]	u	Unknown [OBSOLETE]
+006_CONTINUING_RESOURCES	03	ISSN center [OBSOLETE]	z	Other
+006_CONTINUING_RESOURCES	03	ISSN center [OBSOLETE]	|	No attempt to code
+006_CONTINUING_RESOURCES	05	Form of original item	g	Punched paper tape [OBSOLETE]
+006_CONTINUING_RESOURCES	05	Form of original item	h	Magnetic tape [OBSOLETE] 
+006_CONTINUING_RESOURCES	05	Form of original item	i	Multimedia [OBSOLETE]
+006_CONTINUING_RESOURCES	05	Form of original item	x	Other physical medium [OBSOLETE]
+006_CONTINUING_RESOURCES	05	Form of original item	z	Other physical medium [OBSOLETE]
+006_CONTINUING_RESOURCES	06	Form of item	g	Punched paper tape [OBSOLETE]
+006_CONTINUING_RESOURCES	06	Form of item	h	Magnetic tape [OBSOLETE]
+006_CONTINUING_RESOURCES	06	Form of item	i	Multimedia [OBSOLETE]
+006_CONTINUING_RESOURCES	06	Form of item	z	Other form of reproduction [OBSOLETE]
+006_CONTINUING_RESOURCES	07	Nature of entire work	n	Legal cases and case notes [OBSOLETE]
+006_CONTINUING_RESOURCES	08-10	Nature of contents	n	Legal cases and case notes [OBSOLETE]
+006_CONTINUING_RESOURCES	11	Government publication	n	Government publication--level undetermined [OBSOLETE]
+006_CONTINUING_RESOURCES	13	Title page availability [OBSOLETE]	#	No separate title page issued
+006_CONTINUING_RESOURCES	13	Title page availability [OBSOLETE]	a	In last issue of volume, loose
+006_CONTINUING_RESOURCES	13	Title page availability [OBSOLETE]	b	In last issue of volume, attached
+006_CONTINUING_RESOURCES	13	Title page availability [OBSOLETE]	c	In first issue of next volume, loose
+006_CONTINUING_RESOURCES	13	Title page availability [OBSOLETE]	d	In first issue of next volume, attached
+006_CONTINUING_RESOURCES	13	Title page availability [OBSOLETE]	e	Published separately, free upon request
+006_CONTINUING_RESOURCES	13	Title page availability [OBSOLETE]	f	Published separately, free, automatically sent
+006_CONTINUING_RESOURCES	13	Title page availability [OBSOLETE]	g	Published separately, purchase, request
+006_CONTINUING_RESOURCES	13	Title page availability [OBSOLETE]	u	Unknown
+006_CONTINUING_RESOURCES	13	Title page availability [OBSOLETE]	z	Other title page availability
+006_CONTINUING_RESOURCES	13	Title page availability [OBSOLETE]	|	No attempt to code
+006_CONTINUING_RESOURCES	14	Index availability [OBSOLETE]	#	No index published
+006_CONTINUING_RESOURCES	14	Index availability [OBSOLETE]	a	Each issue contains index to its own contents (no volume index), loose
+006_CONTINUING_RESOURCES	14	Index availability [OBSOLETE]	b	In last issue of volume, loose, separately paged
+006_CONTINUING_RESOURCES	14	Index availability [OBSOLETE]	c	In last issue of volume, loose, unpaged
+006_CONTINUING_RESOURCES	14	Index availability [OBSOLETE]	d	In last issue of volume, attached
+006_CONTINUING_RESOURCES	14	Index availability [OBSOLETE]	e	In first issue of next volume, loose, separately paged
+006_CONTINUING_RESOURCES	14	Index availability [OBSOLETE]	f	In first issue of next volume, loose, unpaged
+006_CONTINUING_RESOURCES	14	Index availability [OBSOLETE]	g	In first issue of next volume, attached
+006_CONTINUING_RESOURCES	14	Index availability [OBSOLETE]	h	Published separately, free, automatically sent
+006_CONTINUING_RESOURCES	14	Index availability [OBSOLETE]	i	Published separately, free, upon request
+006_CONTINUING_RESOURCES	14	Index availability [OBSOLETE]	j	Published separately, bound from publisher, free, automatically sent
+006_CONTINUING_RESOURCES	14	Index availability [OBSOLETE]	k	Published separately, bound from publisher, free, upon request
+006_CONTINUING_RESOURCES	14	Index availability [OBSOLETE]	l	Received separately, bound from publisher
+006_CONTINUING_RESOURCES	14	Index availability [OBSOLETE]	m	Supplement or subseries, indexed in parent journal index
+006_CONTINUING_RESOURCES	14	Index availability [OBSOLETE]	u	Unknown
+006_CONTINUING_RESOURCES	14	Index availability [OBSOLETE]	z	Other index availability
+006_CONTINUING_RESOURCES	14	Index availability [OBSOLETE]	|	No attempt to code
+006_CONTINUING_RESOURCES	15	Cumulative index availability [OBSOLETE]	0	No cumulative index available
+006_CONTINUING_RESOURCES	15	Cumulative index availability [OBSOLETE]	1	Cumulative index available
+006_CONTINUING_RESOURCES	15	Cumulative index availability [OBSOLETE]	u	Unknown
+006_CONTINUING_RESOURCES	15	Cumulative index availability [OBSOLETE]	|	No attempt to code
+006_VISUAL_MATERIALS	04	In LC collection [OBSOLETE]	#	Not in LC
+006_VISUAL_MATERIALS	04	In LC collection [OBSOLETE]	a	In LC, print note
+006_VISUAL_MATERIALS	04	In LC collection [OBSOLETE]	b	In LC, do not print note
+006_VISUAL_MATERIALS	04	In LC collection [OBSOLETE]	u	Unknown
+006_VISUAL_MATERIALS	06-10	Accompanying matter [OBSOLETE]	#	No accompanying matter
+006_VISUAL_MATERIALS	06-10	Accompanying matter [OBSOLETE]	0	No [OBSOLETE]
+006_VISUAL_MATERIALS	06-10	Accompanying matter [OBSOLETE]	1	Yes [OBSOLETE]
+006_VISUAL_MATERIALS	06-10	Accompanying matter [OBSOLETE]	l	Stills
+006_VISUAL_MATERIALS	06-10	Accompanying matter [OBSOLETE]	m	Script material
+006_VISUAL_MATERIALS	06-10	Accompanying matter [OBSOLETE]	o	Posters
+006_VISUAL_MATERIALS	06-10	Accompanying matter [OBSOLETE]	p	Pressbooks
+006_VISUAL_MATERIALS	06-10	Accompanying matter [OBSOLETE]	q	Lobby cards
+006_VISUAL_MATERIALS	06-10	Accompanying matter [OBSOLETE]	r	Instructional materials
+006_VISUAL_MATERIALS	06-10	Accompanying matter [OBSOLETE]	s	Music
+006_VISUAL_MATERIALS	06-10	Accompanying matter [OBSOLETE]	z	Other
+006_VISUAL_MATERIALS	06-10	Accompanying matter [OBSOLETE]	|	No attempt to code
+006_VISUAL_MATERIALS	11	Government publication	n	Government publication--level undetermined [OBSOLETE]
+006_VISUAL_MATERIALS	15	Main entry in body of entry [OBSOLETE]	0	Main entry not in body of entry
+006_VISUAL_MATERIALS	15	Main entry in body of entry [OBSOLETE]	1	Main entry in body of entry
+006_VISUAL_MATERIALS	15	Main entry in body of entry [OBSOLETE]	|	No attempt to code
+006_VISUAL_MATERIALS	16	Type of visual material	e	Electronic videorecording [OBSOLETE]
+006_VISUAL_MATERIALS	17	Technique	#	Not applicable [OBSOLETE]
+006_MIXED_MATERIALS	06	Form of item	g	Punched paper tape [OBSOLETE]
+006_MIXED_MATERIALS	06	Form of item	h	Magnetic tape [OBSOLETE]
+006_MIXED_MATERIALS	06	Form of item	i	Multimedia [OBSOLETE]
+006_MIXED_MATERIALS	06	Form of item	j	Handwritten transcript [OBSOLETE]
+006_MIXED_MATERIALS	06	Form of item	p	Photocopy [OBSOLETE]
+006_MIXED_MATERIALS	06	Form of item	t	Typewritten transcript [OBSOLETE]
+006_MIXED_MATERIALS	06	Form of item	z	Other form of reproduction [OBSOLETE]
+006_MIXED_MATERIALS	13	Case file indicator [OBSOLETE]	#	No case file exists
+006_MIXED_MATERIALS	13	Case file indicator [OBSOLETE]	c	Case file exists
+006_MIXED_MATERIALS	15	Processing status code [OBSOLETE]	a	Collection not in library
+006_MIXED_MATERIALS	15	Processing status code [OBSOLETE]	b	Completely processed
+006_MIXED_MATERIALS	15	Processing status code [OBSOLETE]	c	Processed but with unprocessed additions
+006_MIXED_MATERIALS	15	Processing status code [OBSOLETE]	d	Requires processing
+006_MIXED_MATERIALS	15	Processing status code [OBSOLETE]	e	Totally unprocessed
+006_MIXED_MATERIALS	15	Processing status code [OBSOLETE]	f	Under total cloture
+006_MIXED_MATERIALS	15	Processing status code [OBSOLETE]	u	Unknown
+006_MIXED_MATERIALS	16	Collection status code [OBSOLETE]	a	Discrete grouping of material
+006_MIXED_MATERIALS	16	Collection status code [OBSOLETE]	b	Accession
+006_MIXED_MATERIALS	16	Collection status code [OBSOLETE]	c	Active solicitation
+006_MIXED_MATERIALS	16	Collection status code [OBSOLETE]	d	Solicitation unsuccessful
+006_MIXED_MATERIALS	16	Collection status code [OBSOLETE]	e	Information file only
+006_MIXED_MATERIALS	16	Collection status code [OBSOLETE]	u	Unknown
+006_MIXED_MATERIALS	17	Level of collection control code [OBSOLETE]	a	Control on collection level
+006_MIXED_MATERIALS	17	Level of collection control code [OBSOLETE]	b	Control by series
+006_MIXED_MATERIALS	17	Level of collection control code [OBSOLETE]	c	Control by container
+006_MIXED_MATERIALS	17	Level of collection control code [OBSOLETE]	d	Control by folder
+006_MIXED_MATERIALS	17	Level of collection control code [OBSOLETE]	e	Control by item
+006_MIXED_MATERIALS	17	Level of collection control code [OBSOLETE]	u	Unknown
