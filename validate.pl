@@ -22,9 +22,11 @@ use MyConfig;
 use StandardMARC;
 use FixedFieldsWarnings;
 use F006;
+use F008;
 
 my $f001                  = F001->new();
 my $f006                  = F006->new();
+my $f008                  = F008->new();
 my $warnings              = MARCWarnings->new();
 my $warnings_fixed_fields = FixedFieldsWarnings->new();
 my @header =
@@ -218,8 +220,8 @@ while ( my $record = $records->next() )
 	  $marc_rule->get_type_of_material( $record->leader() );
 	$marc_rule->check_leader( $record->leader(),      $type_of_material,
 							  $warnings_fixed_fields, $f001->bib_id );
-	$marc_rule->check_008( $record, $type_of_material, $warnings_fixed_fields,
-						   $f001->bib_id );
+#	$marc_rule->check_008( $record, $type_of_material, $warnings_fixed_fields,
+#						   $f001->bib_id );
 
 	$marc_rule->check_language( $record, $warnings, $f001->bib_id );
 	$marc_rule->check_245( $record, $warnings, $f001->bib_id, @article );
@@ -236,6 +238,18 @@ while ( my $record = $records->next() )
 		foreach my $field (@fields006)
 		{
 			$f006->check( $f001->bib_id, $field, $warnings_fixed_fields )
+			  ;
+
+		}
+
+	}
+
+	my @fields008 = $record->field('008');
+	if (@fields008)
+	{
+		foreach my $field (@fields008)
+		{
+			$f008->check( $f001->bib_id, $field, $warnings_fixed_fields, $type_of_material )
 			  ;
 
 		}
