@@ -1,0 +1,714 @@
+ALL	00-05	Date entered on file		
+ALL	06	Type of date/Publication status	b	No dates given; B.C. date involved
+ALL	06	Type of date/Publication status	c	Continuing resource currently published
+ALL	06	Type of date/Publication status	d	Continuing resource ceased publication
+ALL	06	Type of date/Publication status	e	Detailed date
+ALL	06	Type of date/Publication status	i	Inclusive dates of collection
+ALL	06	Type of date/Publication status	k	Range of years of bulk of collection
+ALL	06	Type of date/Publication status	m	Multiple dates
+ALL	06	Type of date/Publication status	n	Dates unknown
+ALL	06	Type of date/Publication status	p	Date of distribution/release/issue and production/recording session when different
+ALL	06	Type of date/Publication status	q	Questionable date
+ALL	06	Type of date/Publication status	r	Reprint/reissue date and original date
+ALL	06	Type of date/Publication status	s	Single known date/probable date
+ALL	06	Type of date/Publication status	t	Publication date and copyright date
+ALL	06	Type of date/Publication status	u	Continuing resource status unknown
+ALL	06	Type of date/Publication status	|	No attempt to code
+ALL	07-10	Date 1	1-9	Date digit
+ALL	07-10	Date 1	#	Date element is not applicable
+ALL	07-10	Date 1	u	Date element is totally or partially unknown
+ALL	07-10	Date 1	|	No attempt to code
+ALL	11-14	Date 2	1-9	Date digit
+ALL	11-14	Date 2	#	Date element is not applicable
+ALL	11-14	Date 2	u	Date element is totally or partially unknown
+ALL	11-14	Date 2	|	No attempt to code
+ALL	15-17	Place of publication, production, or execution		
+ALL	35-37	Language		
+ALL	38	Modified record	#	Not modified
+ALL	38	Modified record	d	Dashed-on information omitted
+ALL	38	Modified record	o	Completely romanized/printed cards romanized
+ALL	38	Modified record	r	Completely romanized/printed cards in script
+ALL	38	Modified record	s	Shortened
+ALL	38	Modified record	x	Missing characters
+ALL	38	Modified record	|	No attempt to code
+ALL	39	Cataloging source	#	National bibliographic agency
+ALL	39	Cataloging source	c	Cooperative cataloging program
+ALL	39	Cataloging source	d	Other
+ALL	39	Cataloging source	u	Unknown
+ALL	39	Cataloging source	|	No attempt to code
+BK	18-21	Illustrations	#	No illustrations
+BK	18-21	Illustrations	a	Illustrations
+BK	18-21	Illustrations	b	Maps
+BK	18-21	Illustrations	c	Portraits
+BK	18-21	Illustrations	d	Charts
+BK	18-21	Illustrations	e	Plans
+BK	18-21	Illustrations	f	Plates
+BK	18-21	Illustrations	g	Music
+BK	18-21	Illustrations	h	Facsimiles
+BK	18-21	Illustrations	i	Coats of arms
+BK	18-21	Illustrations	j	Genealogical tables
+BK	18-21	Illustrations	k	Forms
+BK	18-21	Illustrations	l	Samples
+BK	18-21	Illustrations	m	Phonodisc, phonowire, etc.
+BK	18-21	Illustrations	o	Photographs
+BK	18-21	Illustrations	p	Illuminations
+BK	18-21	Illustrations	|	No attempt to code
+BK	22	Target audience	#	Unknown or not specified
+BK	22	Target audience	a	Preschool
+BK	22	Target audience	b	Primary
+BK	22	Target audience	c	Pre-adolescent
+BK	22	Target audience	d	Adolescent
+BK	22	Target audience	e	Adult
+BK	22	Target audience	f	Specialized
+BK	22	Target audience	g	General
+BK	22	Target audience	j	Juvenile
+BK	22	Target audience	|	No attempt to code
+BK	23	Form of item	#	None of the following
+BK	23	Form of item	a	Microfilm
+BK	23	Form of item	b	Microfiche
+BK	23	Form of item	c	Microopaque
+BK	23	Form of item	d	Large print
+BK	23	Form of item	f	Braille
+BK	23	Form of item	o	Online
+BK	23	Form of item	q	Direct electronic
+BK	23	Form of item	r	Regular print reproduction
+BK	23	Form of item	s	Electronic
+BK	23	Form of item	|	No attempt to code
+BK	24-27	Nature of contents	#	No specified nature of contents
+BK	24-27	Nature of contents	a	Abstracts/summaries
+BK	24-27	Nature of contents	b	Bibliographies
+BK	24-27	Nature of contents	c	Catalogs
+BK	24-27	Nature of contents	d	Dictionaries
+BK	24-27	Nature of contents	e	Encyclopedias
+BK	24-27	Nature of contents	f	Handbooks
+BK	24-27	Nature of contents	g	Legal articles
+BK	24-27	Nature of contents	i	Indexes
+BK	24-27	Nature of contents	j	Patent document
+BK	24-27	Nature of contents	k	Discographies
+BK	24-27	Nature of contents	l	Legislation
+BK	24-27	Nature of contents	m	Theses
+BK	24-27	Nature of contents	n	Surveys of literature in a subject area
+BK	24-27	Nature of contents	o	Reviews
+BK	24-27	Nature of contents	p	Programmed texts
+BK	24-27	Nature of contents	q	Filmographies
+BK	24-27	Nature of contents	r	Directories
+BK	24-27	Nature of contents	s	Statistics
+BK	24-27	Nature of contents	t	Technical reports
+BK	24-27	Nature of contents	u	Standards/specifications
+BK	24-27	Nature of contents	v	Legal cases and case notes
+BK	24-27	Nature of contents	w	Law reports and digests
+BK	24-27	Nature of contents	y	Yearbooks
+BK	24-27	Nature of contents	z	Treaties
+BK	24-27	Nature of contents	2	Offprints
+BK	24-27	Nature of contents	5	Calendars
+BK	24-27	Nature of contents	6	Comics/graphic novels
+BK	24-27	Nature of contents	|	No attempt to code
+BK	28	Government publication	#	Not a government publication
+BK	28	Government publication	a	Autonomous or semi-autonomous component
+BK	28	Government publication	c	Multilocal
+BK	28	Government publication	f	Federal/national
+BK	28	Government publication	i	International intergovernmental
+BK	28	Government publication	l	Local
+BK	28	Government publication	m	Multistate
+BK	28	Government publication	o	Government publication--level undetermined
+BK	28	Government publication	s	State, provincial, territorial, dependent, etc.
+BK	28	Government publication	u	Unknown if item is government publication
+BK	28	Government publication	z	Other
+BK	28	Government publication	|	No attempt to code
+BK	29	Conference publication	0	Not a conference publication
+BK	29	Conference publication	1	Conference publication
+BK	29	Conference publication	|	No attempt to code
+BK	30	Festschrift	0	Not a festschrift
+BK	30	Festschrift	1	Festschrift
+BK	30	Festschrift	|	No attempt to code
+BK	31	Index	0	No index
+BK	31	Index	1	Index present
+BK	31	Index	|	No attempt to code
+BK	32	Undefined	#	Undefined
+BK	32	Undefined	|	Undefined
+BK	33	Literary form	0	Not fiction (not further specified)
+BK	33	Literary form	1	Fiction (not further specified)
+BK	33	Literary form	d	Dramas
+BK	33	Literary form	e	Essays
+BK	33	Literary form	f	Novels
+BK	33	Literary form	h	Humor, satires, etc.
+BK	33	Literary form	i	Letters
+BK	33	Literary form	j	Short stories
+BK	33	Literary form	m	Mixed forms
+BK	33	Literary form	p	Poetry
+BK	33	Literary form	s	Speeches
+BK	33	Literary form	u	Unknown
+BK	33	Literary form	|	No attempt to code
+BK	34	Biography	#	No biographical material
+BK	34	Biography	a	Autobiography
+BK	34	Biography	b	Individual biography
+BK	34	Biography	c	Collective biography
+BK	34	Biography	d	Contains biographical information
+BK	34	Biography	|	No attempt to code
+CF	18-21	Undefined	#	Undefined
+CF	18-21	Undefined	|	Undefined
+CF	22	Target audience	#	Unknown or not specified
+CF	22	Target audience	a	Preschool
+CF	22	Target audience	b	Primary
+CF	22	Target audience	c	Pre-adolescent
+CF	22	Target audience	d	Adolescent
+CF	22	Target audience	e	Adult
+CF	22	Target audience	f	Specialized
+CF	22	Target audience	g	General
+CF	22	Target audience	j	Juvenile
+CF	22	Target audience	|	No attempt to code
+CF	23	Form of item	o	Online
+CF	23	Form of item	q	Direct electronic
+CF	24-25	Undefined	#	Undefined
+CF	24-25	Undefined	|	Undefined
+CF	26	Type of computer file	a	Numeric data
+CF	26	Type of computer file	b	Computer program
+CF	26	Type of computer file	c	Representational
+CF	26	Type of computer file	d	Document
+CF	26	Type of computer file	e	Bibliographic data
+CF	26	Type of computer file	f	Font
+CF	26	Type of computer file	g	Game
+CF	26	Type of computer file	h	Sound
+CF	26	Type of computer file	i	Interactive multimedia
+CF	26	Type of computer file	j	Online system or service
+CF	26	Type of computer file	m	Combination
+CF	26	Type of computer file	u	Unknown
+CF	26	Type of computer file	z	Other
+CF	26	Type of computer file	|	No attempt to code
+CF	27	Undefined	#	Undefined
+CF	27	Undefined	|	Undefined
+CF	28	Government publication	#	Not a government publication
+CF	28	Government publication	a	Autonomous or semi-autonomous component
+CF	28	Government publication	c	Multilocal
+CF	28	Government publication	f	Federal/national
+CF	28	Government publication	i	International intergovernmental
+CF	28	Government publication	l	Local
+CF	28	Government publication	m	Multistate
+CF	28	Government publication	o	Government publication--level undetermined
+CF	28	Government publication	s	State, provincial, territorial, dependent, etc.
+CF	28	Government publication	u	Unknown if item is government publication
+CF	28	Government publication	z	Other
+CF	28	Government publication	|	No attempt to code
+CF	29-34	Undefined	#	Undefined
+CF	29-34	Undefined	|	Undefined
+MP	18-21	Relief	#	No relief shown
+MP	18-21	Relief	a	Contours
+MP	18-21	Relief	b	Shading
+MP	18-21	Relief	c	Gradient and bathymetric tints
+MP	18-21	Relief	d	Hachures
+MP	18-21	Relief	e	Bathymetry/soundings
+MP	18-21	Relief	f	Form lines
+MP	18-21	Relief	g	Spot heights
+MP	18-21	Relief	i	Pictorially
+MP	18-21	Relief	j	Land forms
+MP	18-21	Relief	k	Bathymetry/isolines
+MP	18-21	Relief	m	Rock drawings
+MP	18-21	Relief	z	Other relief type
+MP	18-21	Relief	|	No attempt to code
+MP	22-23	Projection	##	Projection not specified
+MP	22-23	Projection	aa	Aitoff
+MP	22-23	Projection	ab	Gnomic
+MP	22-23	Projection	ac	Lambert's azimuthal equal area
+MP	22-23	Projection	ad	Orthographic
+MP	22-23	Projection	ae	Azimuthal equidistant
+MP	22-23	Projection	af	Stereographic
+MP	22-23	Projection	ag	General vertical near-sided
+MP	22-23	Projection	am	Modified stereographic for Alaska
+MP	22-23	Projection	an	Chamberlin trimetric
+MP	22-23	Projection	ap	Polar stereographic
+MP	22-23	Projection	au	Azimuthal, specific type unknown
+MP	22-23	Projection	az	Azimuthal, other
+MP	22-23	Projection	ba	Gall
+MP	22-23	Projection	bb	Goode's homolographic
+MP	22-23	Projection	bc	Lambert's cylindrical equal area
+MP	22-23	Projection	bd	Mercator
+MP	22-23	Projection	be	Miller
+MP	22-23	Projection	bf	Mollweide
+MP	22-23	Projection	bg	Sinusoidal
+MP	22-23	Projection	bh	Transverse Mercator
+MP	22-23	Projection	bi	Gauss-Kruger
+MP	22-23	Projection	bj	Equirectangular
+MP	22-23	Projection	bk	Krovak
+MP	22-23	Projection	bl	Cassini-Soldner
+MP	22-23	Projection	bo	Oblique Mercator
+MP	22-23	Projection	br	Robinson
+MP	22-23	Projection	bs	Space oblique Mercator
+MP	22-23	Projection	bu	Cylindrical, specific type unknown
+MP	22-23	Projection	bz	Cylindrical, other
+MP	22-23	Projection	ca	Alber's equal area
+MP	22-23	Projection	cb	Bonne
+MP	22-23	Projection	cc	Lambert's conformal conic
+MP	22-23	Projection	ce	Equidistant conic
+MP	22-23	Projection	cp	Polyconic
+MP	22-23	Projection	cu	Conic, specific type unknown
+MP	22-23	Projection	cz	Conic, other
+MP	22-23	Projection	da	Armadillo
+MP	22-23	Projection	db	Butterfly
+MP	22-23	Projection	dc	Eckert
+MP	22-23	Projection	dd	Goode's homolosine
+MP	22-23	Projection	de	Miller's bipolar oblique conformal conic
+MP	22-23	Projection	df	Van Der Grinten
+MP	22-23	Projection	dg	Dimaxion
+MP	22-23	Projection	dh	Cordiform
+MP	22-23	Projection	dl	Lambert conformal
+MP	22-23	Projection	zz	Other
+MP	22-23	Projection	|	No attempt to code
+MP	24	Undefined	#	Undefined
+MP	24	Undefined	|	Undefined
+MP	25	Type of cartographic material	a	Single map
+MP	25	Type of cartographic material	b	Map series
+MP	25	Type of cartographic material	c	Map serial
+MP	25	Type of cartographic material	d	Globe
+MP	25	Type of cartographic material	e	Atlas
+MP	25	Type of cartographic material	f	Separate map supplement to another work
+MP	25	Type of cartographic material	g	Map bound as part of another work
+MP	25	Type of cartographic material	u	Unknown
+MP	25	Type of cartographic material	z	Other
+MP	25	Type of cartographic material	|	No attempt to code
+MP	26-27	Undefined	#	Undefined
+MP	26-27	Undefined	|	Undefined
+MP	28	Government publication	#	Not a government publication
+MP	28	Government publication	a	Autonomous or semi-autonomous component
+MP	28	Government publication	c	Multilocal
+MP	28	Government publication	f	Federal/national
+MP	28	Government publication	i	International intergovernmental
+MP	28	Government publication	l	Local
+MP	28	Government publication	m	Multistate
+MP	28	Government publication	o	Government publication--level undetermined
+MP	28	Government publication	s	State, provincial, territorial, dependent, etc.
+MP	28	Government publication	u	Unknown if item is government publication
+MP	28	Government publication	z	Other
+MP	28	Government publication	|	No attempt to code
+MP	29	Form of item	#	None of the following
+MP	29	Form of item	a	Microfilm
+MP	29	Form of item	b	Microfiche
+MP	29	Form of item	c	Microopaque
+MP	29	Form of item	d	Large print
+MP	29	Form of item	f	Braille
+MP	29	Form of item	o	Online
+MP	29	Form of item	q	Direct electronic
+MP	29	Form of item	r	Regular print reproduction
+MP	29	Form of item	s	Electronic
+MP	29	Form of item	|	No attempt to code
+MP	30	Undefined	#	Undefined
+MP	30	Undefined	|	Undefined
+MP	31	Index	0	No index
+MP	31	Index	1	Index present
+MP	31	Index	|	No attempt to code
+MP	32	Undefined	#	Undefined
+MP	32	Undefined	|	Undefined
+MP	33-34	Special format characteristics	#	No specified special format characteristics
+MP	33-34	Special format characteristics	e	Manuscript
+MP	33-34	Special format characteristics	j	Picture card, post card
+MP	33-34	Special format characteristics	k	Calendar
+MP	33-34	Special format characteristics	l	Puzzle
+MP	33-34	Special format characteristics	n	Game
+MP	33-34	Special format characteristics	o	Wall map
+MP	33-34	Special format characteristics	p	Playing cards
+MP	33-34	Special format characteristics	r	Loose-leaf
+MP	33-34	Special format characteristics	z	Other
+MP	33-34	Special format characteristics	|	No attempt to code
+MU	18-19	Form of composition	an	Anthems
+MU	18-19	Form of composition	bd	Ballads
+MU	18-19	Form of composition	bg	Bluegrass music
+MU	18-19	Form of composition	bl	Blues
+MU	18-19	Form of composition	bt	Ballets
+MU	18-19	Form of composition	ca	Chaconnes
+MU	18-19	Form of composition	cb	Chants, Other religions
+MU	18-19	Form of composition	cc	Chant, Christian
+MU	18-19	Form of composition	cg	Concerti grossi
+MU	18-19	Form of composition	ch	Chorales
+MU	18-19	Form of composition	cl	Chorale preludes
+MU	18-19	Form of composition	cn	Canons and rounds
+MU	18-19	Form of composition	co	Concertos
+MU	18-19	Form of composition	cp	Chansons, polyphonic
+MU	18-19	Form of composition	cr	Carols
+MU	18-19	Form of composition	cs	Chance compositions
+MU	18-19	Form of composition	ct	Cantatas
+MU	18-19	Form of composition	cy	Country music
+MU	18-19	Form of composition	cz	Canzonas
+MU	18-19	Form of composition	df	Dance forms
+MU	18-19	Form of composition	dv	Divertimentos, serenades, cassations, divertissements, notturni
+MU	18-19	Form of composition	fg	Fugues
+MU	18-19	Form of composition	fl	Flamenco
+MU	18-19	Form of composition	fm	Folk music
+MU	18-19	Form of composition	ft	Fantasias
+MU	18-19	Form of composition	gm	Gospel music
+MU	18-19	Form of composition	hy	Hymns
+MU	18-19	Form of composition	jz	Jazz
+MU	18-19	Form of composition	mc	Musical revues and comedies
+MU	18-19	Form of composition	md	Madrigals
+MU	18-19	Form of composition	mi	Minuets
+MU	18-19	Form of composition	mo	Motets
+MU	18-19	Form of composition	mp	Motion picture music
+MU	18-19	Form of composition	mr	Marches
+MU	18-19	Form of composition	ms	Masses
+MU	18-19	Form of composition	mu	Multiple forms
+MU	18-19	Form of composition	mz	Mazurkas
+MU	18-19	Form of composition	nc	Nocturnes
+MU	18-19	Form of composition	nn	Not applicable
+MU	18-19	Form of composition	op	Operas
+MU	18-19	Form of composition	or	Oratorios
+MU	18-19	Form of composition	ov	Overtures
+MU	18-19	Form of composition	pg	Program music
+MU	18-19	Form of composition	pm	Passion music
+MU	18-19	Form of composition	po	Polonaises
+MU	18-19	Form of composition	pp	Popular music
+MU	18-19	Form of composition	pr	Preludes
+MU	18-19	Form of composition	ps	Passacaglias
+MU	18-19	Form of composition	pt	Part-songs
+MU	18-19	Form of composition	pv	Pavans
+MU	18-19	Form of composition	rc	Rock music
+MU	18-19	Form of composition	rd	Rondos
+MU	18-19	Form of composition	rg	Ragtime music
+MU	18-19	Form of composition	ri	Ricercars
+MU	18-19	Form of composition	rp	Rhapsodies
+MU	18-19	Form of composition	rq	Requiems
+MU	18-19	Form of composition	sd	Square dance music
+MU	18-19	Form of composition	sg	Songs
+MU	18-19	Form of composition	sn	Sonatas
+MU	18-19	Form of composition	sp	Symphonic poems
+MU	18-19	Form of composition	st	Studies and exercises
+MU	18-19	Form of composition	su	Suites
+MU	18-19	Form of composition	sy	Symphonies
+MU	18-19	Form of composition	tc	Toccatas
+MU	18-19	Form of composition	tl	Teatro lirico
+MU	18-19	Form of composition	ts	Trio-sonatas
+MU	18-19	Form of composition	uu	Unknown
+MU	18-19	Form of composition	vi	Villancicos 
+MU	18-19	Form of composition	vr	Variations
+MU	18-19	Form of composition	wz	Waltzes
+MU	18-19	Form of composition	za	Zarzuelas
+MU	18-19	Form of composition	zz	Other
+MU	18-19	Form of composition	||	No attempt to code
+MU	20	Format of music	a	Full score
+MU	20	Format of music	b	Miniature or study score
+MU	20	Format of music	c	Accompaniment reduced for keyboard
+MU	20	Format of music	d	Voice score with accompaniment omitted
+MU	20	Format of music	e	Condensed score or piano-conductor score
+MU	20	Format of music	g	Close score
+MU	20	Format of music	h	Chorus score
+MU	20	Format of music	i	Condensed score
+MU	20	Format of music	j	Performer-conductor part
+MU	20	Format of music	k	Vocal score
+MU	20	Format of music	l	Score
+MU	20	Format of music	m	Multiple score formats
+MU	20	Format of music	n	Not applicable
+MU	20	Format of music	p	Piano score
+MU	20	Format of music	u	Unknown
+MU	20	Format of music	z	Other
+MU	20	Format of music	|	No attempt to code
+MU	21	Music parts	#	No parts in hand or not specified
+MU	21	Music parts	d	Instrumental and vocal parts
+MU	21	Music parts	e	Instrumental parts
+MU	21	Music parts	f	Vocal parts
+MU	21	Music parts	n	Not applicable
+MU	21	Music parts	u	Unknown
+MU	21	Music parts	|	No attempt to code
+MU	22	Target audience	#	Unknown or not specified
+MU	22	Target audience	a	Preschool
+MU	22	Target audience	b	Primary
+MU	22	Target audience	c	Pre-adolescent
+MU	22	Target audience	d	Adolescent
+MU	22	Target audience	e	Adult
+MU	22	Target audience	f	Specialized
+MU	22	Target audience	g	General
+MU	22	Target audience	j	Juvenile
+MU	22	Target audience	|	No attempt to code
+MU	23	Form of item	#	None of the following
+MU	23	Form of item	a	Microfilm
+MU	23	Form of item	b	Microfiche
+MU	23	Form of item	c	Microopaque
+MU	23	Form of item	d	Large print
+MU	23	Form of item	f	Braille
+MU	23	Form of item	g	Punched paper tape [
+MU	23	Form of item	o	Online
+MU	23	Form of item	q	Direct electronic
+MU	23	Form of item	r	Regular print reproduction
+MU	23	Form of item	s	Electronic
+MU	23	Form of item	|	No attempt to code
+MU	24-29	Accompanying matter	#	No accompanying matter
+MU	24-29	Accompanying matter	a	Discography
+MU	24-29	Accompanying matter	b	Bibliography
+MU	24-29	Accompanying matter	c	Thematic index
+MU	24-29	Accompanying matter	d	Libretto or text
+MU	24-29	Accompanying matter	e	Biography of composer or author
+MU	24-29	Accompanying matter	f	Biography of performer or history of ensemble
+MU	24-29	Accompanying matter	g	Technical and/or historical information on instruments
+MU	24-29	Accompanying matter	h	Technical information on music
+MU	24-29	Accompanying matter	i	Historical information
+MU	24-29	Accompanying matter	k	Ethnological information
+MU	24-29	Accompanying matter	r	Instructional materials
+MU	24-29	Accompanying matter	s	Music
+MU	24-29	Accompanying matter	z	Other
+MU	24-29	Accompanying matter	|	No attempt to code
+MU	30-31	Literary text for sound recordings	#	Item is a musical sound recording
+MU	30-31	Literary text for sound recordings	a	Autobiography
+MU	30-31	Literary text for sound recordings	b	Biography
+MU	30-31	Literary text for sound recordings	c	Conference proceedings
+MU	30-31	Literary text for sound recordings	d	Drama
+MU	30-31	Literary text for sound recordings	e	Essays
+MU	30-31	Literary text for sound recordings	f	Fiction
+MU	30-31	Literary text for sound recordings	g	Reporting
+MU	30-31	Literary text for sound recordings	h	History
+MU	30-31	Literary text for sound recordings	i	Instruction
+MU	30-31	Literary text for sound recordings	j	Language instruction
+MU	30-31	Literary text for sound recordings	k	Comedy
+MU	30-31	Literary text for sound recordings	l	Lectures, speeches
+MU	30-31	Literary text for sound recordings	m	Memoirs
+MU	30-31	Literary text for sound recordings	n	Not applicable
+MU	30-31	Literary text for sound recordings	o	Folktales
+MU	30-31	Literary text for sound recordings	p	Poetry
+MU	30-31	Literary text for sound recordings	r	Rehearsals
+MU	30-31	Literary text for sound recordings	s	Sounds
+MU	30-31	Literary text for sound recordings	t	Interviews
+MU	30-31	Literary text for sound recordings	z	Other
+MU	30-31	Literary text for sound recordings	|	No attempt to code
+MU	32	Undefined	#	Undefined
+MU	32	Undefined	|	Undefined
+MU	33	Transposition and arrangement	#	Not arrangement or transposition or not specified
+MU	33	Transposition and arrangement	a	Transposition
+MU	33	Transposition and arrangement	b	Arrangement
+MU	33	Transposition and arrangement	c	Both transposed and arranged
+MU	33	Transposition and arrangement	n	Not applicable
+MU	33	Transposition and arrangement	u	Unknown
+MU	33	Transposition and arrangement	|	No attempt to code 
+MU	34	Undefined	#	Undefined
+MU	34	Undefined	|	Undefined
+CR	18	Frequency	#	No determinable frequency
+CR	18	Frequency	a	Annual
+CR	18	Frequency	b	Bimonthly
+CR	18	Frequency	c	Semiweekly
+CR	18	Frequency	d	Daily
+CR	18	Frequency	e	Biweekly
+CR	18	Frequency	f	Semiannual
+CR	18	Frequency	g	Biennial
+CR	18	Frequency	h	Triennial
+CR	18	Frequency	i	Three times a week
+CR	18	Frequency	j	Three times a month
+CR	18	Frequency	k	Continuously updated
+CR	18	Frequency	m	Monthly
+CR	18	Frequency	q	Quarterly
+CR	18	Frequency	s	Semimonthly
+CR	18	Frequency	t	Three times a year
+CR	18	Frequency	u	Unknown
+CR	18	Frequency	w	Weekly
+CR	18	Frequency	z	Other
+CR	18	Frequency	|	No attempt to code
+CR	19	Regularity	n	Normalized irregular
+CR	19	Regularity	r	Regular
+CR	19	Regularity	u	Unknown
+CR	19	Regularity	x	Completely irregular
+CR	19	Regularity	|	No attempt to code
+CR	20	Undefined	#	Undefined
+CR	20	Undefined	|	Undefined
+CR	21	Type of continuing resource	#	None of the following
+CR	21	Type of continuing resource	d	Updating database
+CR	21	Type of continuing resource	l	Updating loose-leaf
+CR	21	Type of continuing resource	m	Monographic series
+CR	21	Type of continuing resource	n	Newspaper
+CR	21	Type of continuing resource	p	Periodical
+CR	21	Type of continuing resource	w	Updating Web site
+CR	21	Type of continuing resource	|	No attempt to code
+CR	22	Form of original item	#	None of the following
+CR	22	Form of original item	a	Microfilm
+CR	22	Form of original item	b	Microfiche
+CR	22	Form of original item	c	Microopaque
+CR	22	Form of original item	d	Large print
+CR	22	Form of original item	e	Newspaper format
+CR	22	Form of original item	f	Braille
+CR	22	Form of original item	o	Online
+CR	22	Form of original item	q	Direct electronic
+CR	22	Form of original item	s	Electronic
+CR	22	Form of original item	|	No attempt to code
+CR	23	Form of item	#	None of the following
+CR	23	Form of item	a	Microfilm
+CR	23	Form of item	b	Microfiche
+CR	23	Form of item	c	Microopaque
+CR	23	Form of item	d	Large print
+CR	23	Form of item	f	Braille
+CR	23	Form of item	o	Online
+CR	23	Form of item	q	Direct electronic
+CR	23	Form of item	r	Regular print reproduction
+CR	23	Form of item	s	Electronic
+CR	23	Form of item	|	No attempt to code
+CR	24	Nature of entire work	#	No specified nature of entire work
+CR	24	Nature of entire work	a	Abstracts/summaries
+CR	24	Nature of entire work	b	Bibliographies
+CR	24	Nature of entire work	c	Catalogs
+CR	24	Nature of entire work	d	Dictionaries
+CR	24	Nature of entire work	e	Encyclopedias
+CR	24	Nature of entire work	f	Handbooks
+CR	24	Nature of entire work	g	Legal articles
+CR	24	Nature of entire work	h	Biography
+CR	24	Nature of entire work	i	Indexes
+CR	24	Nature of entire work	k	Discographies
+CR	24	Nature of entire work	l	Legislation
+CR	24	Nature of entire work	m	Theses
+CR	24	Nature of entire work	n	Surveys of literature in a subject area
+CR	24	Nature of entire work	o	Reviews
+CR	24	Nature of entire work	p	Programmed texts
+CR	24	Nature of entire work	q	Filmographies
+CR	24	Nature of entire work	r	Directories
+CR	24	Nature of entire work	s	Statistics
+CR	24	Nature of entire work	t	Technical reports
+CR	24	Nature of entire work	u	Standards/specifications
+CR	24	Nature of entire work	v	Legal cases and case notes
+CR	24	Nature of entire work	w	Law reports and digests
+CR	24	Nature of entire work	y	Yearbooks
+CR	24	Nature of entire work	z	Treaties
+CR	24	Nature of entire work	5	Calendars
+CR	24	Nature of entire work	6	Comics/graphic novels
+CR	24	Nature of entire work	|	No attempt to code
+CR	25-27	Nature of contents	#	No specified nature of contents
+CR	25-27	Nature of contents	a	Abstracts/summaries
+CR	25-27	Nature of contents	b	Bibliographies
+CR	25-27	Nature of contents	c	Catalogs
+CR	25-27	Nature of contents	d	Dictionaries
+CR	25-27	Nature of contents	e	Encyclopedias
+CR	25-27	Nature of contents	f	Handbooks
+CR	25-27	Nature of contents	g	Legal articles
+CR	25-27	Nature of contents	h	Biography
+CR	25-27	Nature of contents	i	Indexes
+CR	25-27	Nature of contents	k	Discographies
+CR	25-27	Nature of contents	l	Legislation
+CR	25-27	Nature of contents	m	Theses
+CR	25-27	Nature of contents	n	Surveys of literature in a subject area
+CR	25-27	Nature of contents	o	Reviews
+CR	25-27	Nature of contents	p	Programmed texts
+CR	25-27	Nature of contents	q	Filmographies
+CR	25-27	Nature of contents	r	Directories
+CR	25-27	Nature of contents	s	Statistics
+CR	25-27	Nature of contents	t	Technical reports
+CR	25-27	Nature of contents	u	Standards/specifications
+CR	25-27	Nature of contents	v	Legal cases and case notes
+CR	25-27	Nature of contents	w	Law reports and digests
+CR	25-27	Nature of contents	y	Yearbooks
+CR	25-27	Nature of contents	z	Treaties
+CR	25-27	Nature of contents	5	Calendars
+CR	25-27	Nature of contents	6	Comics/graphic novels
+CR	25-27	Nature of contents	|	No attempt to code
+CR	28	Government publication	#	Not a government publication
+CR	28	Government publication	a	Autonomous or semi-autonomous component
+CR	28	Government publication	c	Multilocal
+CR	28	Government publication	f	Federal/national
+CR	28	Government publication	i	International intergovernmental
+CR	28	Government publication	l	Local
+CR	28	Government publication	m	Multistate
+CR	28	Government publication	o	Government publication--level undetermined
+CR	28	Government publication	s	State, provincial, territorial, dependent,etc.
+CR	28	Government publication	u	Unknown if item is government publication
+CR	28	Government publication	z	Other
+CR	28	Government publication	|	No attempt to code
+CR	29	Conference publication	0	Not a conference publication
+CR	29	Conference publication	1	Conference publication
+CR	29	Conference publication	|	No attempt to code
+CR	30-32	Undefined	#	Undefined
+CR	30-32	Undefined	|	Undefined
+CR	33	Original alphabet or script of title	#	No alphabet or script given/no key title
+CR	33	Original alphabet or script of title	a	Basic roman
+CR	33	Original alphabet or script of title	b	Extended roman
+CR	33	Original alphabet or script of title	c	Cyrillic
+CR	33	Original alphabet or script of title	d	Japanese
+CR	33	Original alphabet or script of title	e	Chinese
+CR	33	Original alphabet or script of title	f	Arabic
+CR	33	Original alphabet or script of title	g	Greek
+CR	33	Original alphabet or script of title	h	Hebrew
+CR	33	Original alphabet or script of title	i	Thai
+CR	33	Original alphabet or script of title	j	Devanagari
+CR	33	Original alphabet or script of title	k	Korean
+CR	33	Original alphabet or script of title	l	Tamil
+CR	33	Original alphabet or script of title	u	Unknown
+CR	33	Original alphabet or script of title	z	Other
+CR	33	Original alphabet or script of title	|	No attempt to code
+CR	34	Entry convention	0	Successive entry
+CR	34	Entry convention	1	Latest entry
+CR	34	Entry convention	2	Integrated entry
+CR	34	Entry convention	|	No attempt to code
+VM	18-20	Running time for motion pictures and videorecordings	000	Running time exceeds three characters
+VM	18-20	Running time for motion pictures and videorecordings	001-999	Running time
+VM	18-20	Running time for motion pictures and videorecordings	---	Running time unknown
+VM	18-20	Running time for motion pictures and videorecordings	nnn	Not applicable
+VM	18-20	Running time for motion pictures and videorecordings	|||	No attempt to code
+VM	21	Undefined	#	Undefined
+VM	21	Undefined	|	Undefined
+VM	22	Target audience	#	Unknown or not specified
+VM	22	Target audience	a	Preschool
+VM	22	Target audience	b	Primary
+VM	22	Target audience	c	Pre-adolescent
+VM	22	Target audience	d	Adolescent
+VM	22	Target audience	e	Adult
+VM	22	Target audience	f	Specialized
+VM	22	Target audience	g	General
+VM	22	Target audience	j	Juvenile
+VM	22	Target audience	|	No attempt to code
+VM	23-27	Undefined	#	Undefined
+VM	23-27	Undefined	|	Undefined
+VM	28	Government publication	#	Not a government publication
+VM	28	Government publication	a	Autonomous or semi-autonomous component
+VM	28	Government publication	c	Multilocal
+VM	28	Government publication	f	Federal/national
+VM	28	Government publication	i	International intergovernmental
+VM	28	Government publication	l	Local
+VM	28	Government publication	m	Multistate
+VM	28	Government publication	o	Government publication--level undetermined
+VM	28	Government publication	s	State, provincial, territorial, dependent, etc.
+VM	28	Government publication	u	Unknown if item is government publication
+VM	28	Government publication	z	Other
+VM	28	Government publication	|	No attempt to code
+VM	29	Form of item	#	None of the following
+VM	29	Form of item	a	Microfilm
+VM	29	Form of item	b	Microfiche
+VM	29	Form of item	c	Microopaque
+VM	29	Form of item	d	Large print
+VM	29	Form of item	f	Braille
+VM	29	Form of item	o	Online
+VM	29	Form of item	q	Direct electronic
+VM	29	Form of item	r	Regular print reproduction
+VM	29	Form of item	s	Electronic
+VM	29	Form of item	|	No attempt to code
+VM	30-32	Undefined	#	Undefined
+VM	30-32	Undefined	|	Undefined
+VM	33	Type of visual material	a	Art original
+VM	33	Type of visual material	b	Kit
+VM	33	Type of visual material	c	Art reproduction
+VM	33	Type of visual material	d	Diorama
+VM	33	Type of visual material	f	Filmstrip
+VM	33	Type of visual material	g	Game
+VM	33	Type of visual material	i	Picture
+VM	33	Type of visual material	k	Graphic
+VM	33	Type of visual material	l	Technical drawing
+VM	33	Type of visual material	m	Motion picture
+VM	33	Type of visual material	n	Chart
+VM	33	Type of visual material	o	Flash card
+VM	33	Type of visual material	p	Microscope slide
+VM	33	Type of visual material	q	Model
+VM	33	Type of visual material	r	Realia
+VM	33	Type of visual material	s	Slide
+VM	33	Type of visual material	t	Transparency
+VM	33	Type of visual material	v	Videorecording
+VM	33	Type of visual material	w	Toy
+VM	33	Type of visual material	z	Other
+VM	33	Type of visual material	|	No attempt to code
+VM	34	Technique	a	Animation
+VM	34	Technique	c	Animation and live action
+VM	34	Technique	l	Live action
+VM	34	Technique	n	Not applicable
+VM	34	Technique	u	Unknown
+VM	34	Technique	z	Other technique
+VM	34	Technique	|	No attempt to code
+MX	18-22	Undefined	#	Undefined
+MX	18-22	Undefined	|	Undefined
+MX	23	Form of item	#	None of the following
+MX	23	Form of item	a	Microfilm
+MX	23	Form of item	b	Microfiche
+MX	23	Form of item	c	Microopaque
+MX	23	Form of item	d	Large print
+MX	23	Form of item	f	Braille
+MX	23	Form of item	o	Online
+MX	23	Form of item	q	Direct electronic
+MX	23	Form of item	r	Regular print reproduction
+MX	23	Form of item	s	Electronic
+MX	23	Form of item	|	No attempt to code
+MX	24-34	Undefined	#	Undefined
+MX	24-34	Undefined	|	Undefined
