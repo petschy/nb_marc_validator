@@ -145,8 +145,8 @@ BK	34	Biography	b	Individual biography
 BK	34	Biography	c	Collective biography
 BK	34	Biography	d	Contains biographical information
 BK	34	Biography	|	No attempt to code
-CF	18-21	Undefined	#	Undefined
-CF	18-21	Undefined	|	Undefined
+CF	18-21	Undefined	####	Undefined
+CF	18-21	Undefined	||||	Undefined
 CF	22	Target audience	#	Unknown or not specified
 CF	22	Target audience	a	Preschool
 CF	22	Target audience	b	Primary
@@ -159,8 +159,8 @@ CF	22	Target audience	j	Juvenile
 CF	22	Target audience	|	No attempt to code
 CF	23	Form of item	o	Online
 CF	23	Form of item	q	Direct electronic
-CF	24-25	Undefined	#	Undefined
-CF	24-25	Undefined	|	Undefined
+CF	24-25	Undefined	##	Undefined
+CF	24-25	Undefined	||	Undefined
 CF	26	Type of computer file	a	Numeric data
 CF	26	Type of computer file	b	Computer program
 CF	26	Type of computer file	c	Representational
@@ -189,8 +189,8 @@ CF	28	Government publication	s	State, provincial, territorial, dependent, etc.
 CF	28	Government publication	u	Unknown if item is government publication
 CF	28	Government publication	z	Other
 CF	28	Government publication	|	No attempt to code
-CF	29-34	Undefined	#	Undefined
-CF	29-34	Undefined	|	Undefined
+CF	29-34	Undefined	######	Undefined
+CF	29-34	Undefined	||||||	Undefined
 MP	18-21	Relief	#	No relief shown
 MP	18-21	Relief	a	Contours
 MP	18-21	Relief	b	Shading
@@ -252,7 +252,7 @@ MP	22-23	Projection	dg	Dimaxion
 MP	22-23	Projection	dh	Cordiform
 MP	22-23	Projection	dl	Lambert conformal
 MP	22-23	Projection	zz	Other
-MP	22-23	Projection	|	No attempt to code
+MP	22-23	Projection	||	No attempt to code
 MP	24	Undefined	#	Undefined
 MP	24	Undefined	|	Undefined
 MP	25	Type of cartographic material	a	Single map
@@ -265,8 +265,8 @@ MP	25	Type of cartographic material	g	Map bound as part of another work
 MP	25	Type of cartographic material	u	Unknown
 MP	25	Type of cartographic material	z	Other
 MP	25	Type of cartographic material	|	No attempt to code
-MP	26-27	Undefined	#	Undefined
-MP	26-27	Undefined	|	Undefined
+MP	26-27	Undefined	##	Undefined
+MP	26-27	Undefined	||	Undefined
 MP	28	Government publication	#	Not a government publication
 MP	28	Government publication	a	Autonomous or semi-autonomous component
 MP	28	Government publication	c	Multilocal
@@ -603,8 +603,8 @@ CR	28	Government publication	|	No attempt to code
 CR	29	Conference publication	0	Not a conference publication
 CR	29	Conference publication	1	Conference publication
 CR	29	Conference publication	|	No attempt to code
-CR	30-32	Undefined	#	Undefined
-CR	30-32	Undefined	|	Undefined
+CR	30-32	Undefined	###	Undefined
+CR	30-32	Undefined	|||	Undefined
 CR	33	Original alphabet or script of title	#	No alphabet or script given/no key title
 CR	33	Original alphabet or script of title	a	Basic roman
 CR	33	Original alphabet or script of title	b	Extended roman
@@ -642,8 +642,8 @@ VM	22	Target audience	f	Specialized
 VM	22	Target audience	g	General
 VM	22	Target audience	j	Juvenile
 VM	22	Target audience	|	No attempt to code
-VM	23-27	Undefined	#	Undefined
-VM	23-27	Undefined	|	Undefined
+VM	23-27	Undefined	#####	Undefined
+VM	23-27	Undefined	|||||	Undefined
 VM	28	Government publication	#	Not a government publication
 VM	28	Government publication	a	Autonomous or semi-autonomous component
 VM	28	Government publication	c	Multilocal
@@ -667,8 +667,8 @@ VM	29	Form of item	q	Direct electronic
 VM	29	Form of item	r	Regular print reproduction
 VM	29	Form of item	s	Electronic
 VM	29	Form of item	|	No attempt to code
-VM	30-32	Undefined	#	Undefined
-VM	30-32	Undefined	|	Undefined
+VM	30-32	Undefined	###	Undefined
+VM	30-32	Undefined	|||	Undefined
 VM	33	Type of visual material	a	Art original
 VM	33	Type of visual material	b	Kit
 VM	33	Type of visual material	c	Art reproduction
@@ -697,8 +697,8 @@ VM	34	Technique	n	Not applicable
 VM	34	Technique	u	Unknown
 VM	34	Technique	z	Other technique
 VM	34	Technique	|	No attempt to code
-MX	18-22	Undefined	#	Undefined
-MX	18-22	Undefined	|	Undefined
+MX	18-22	Undefined	#####	Undefined
+MX	18-22	Undefined	|||||	Undefined
 MX	23	Form of item	#	None of the following
 MX	23	Form of item	a	Microfilm
 MX	23	Form of item	b	Microfiche
@@ -710,5 +710,5 @@ MX	23	Form of item	q	Direct electronic
 MX	23	Form of item	r	Regular print reproduction
 MX	23	Form of item	s	Electronic
 MX	23	Form of item	|	No attempt to code
-MX	24-34	Undefined	#	Undefined
-MX	24-34	Undefined	|	Undefined
+MX	24-34	Undefined	###########	Undefined
+MX	24-34	Undefined	|||||||||||	Undefined
